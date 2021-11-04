@@ -1,0 +1,627 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/headpic.jfif">
+  <link rel="icon" type="image/png" href="/image/headpic.jfif">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PokeStar">
+  <meta name="keywords" content="">
+  <title>cs231n-assignment2作业笔记 - PokeStar&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.pokestar.wang","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"iBJ8IeKzxC1t8gL78pOhBgve-9Nh9j0Va","app_key":"ikqlgnddeJu2RBBeFTSuRAyx","server_url":"https://ibj8iekz.lc-cn-e1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>PokeStar的个人小站</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/image/bg/North-America-Nebula-Deepscape_Liron-Gertsman.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="cs231n-assignment2作业笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-18 09:46" pubdate>
+        2021年8月18日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      61
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">cs231n-assignment2作业笔记</h1>
+            
+            <div class="markdown-body">
+              <h1 id="cs231n-assignment2"><a class="markdownIt-Anchor" href="#cs231n-assignment2"></a> CS231n-assignment2</h1>
+<p>作业2的内容主要有：全连接神经网络（模块化实现），BatchNormalization，Dropout，CNN，Pytorch/Tensorflow。具体代码已经上传<a target="_blank" rel="noopener" href="https://github.com/1219521375/CS231n2020">github</a>。</p>
+<h2 id="fully-connected-neural-network"><a class="markdownIt-Anchor" href="#fully-connected-neural-network"></a> Fully connected Neural Network</h2>
+<p>在上个作业中已经实现了两层全连接神经网络，但是代码不够模块化，不能方便将层数加深。将全连接层，relu层，softmax层都分别模块化为函数，每一层只需关注从后一层传回的梯度，再计算本层输入的梯度，一层层回传，就可以实现链式求导，代码编写逻辑与上一个作业类似，这里介绍神经网络的常用激活函数以及神经网络学习参数和搜索最优超参数的过程。</p>
+<h3 id="常用激活函数"><a class="markdownIt-Anchor" href="#常用激活函数"></a> 常用激活函数</h3>
+<h4 id="sigmoid"><a class="markdownIt-Anchor" href="#sigmoid"></a> sigmoid</h4>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210818170149.png" srcset="/img/loading.gif" style="zoom:80%;" />
+$$
+\sigma =\frac{1}{1+e^{-x}}
+$$
+sigmoid函数将输入的一个实数“压缩”到0到1之间，大负数变为0，大正数变为1。sigmoid函数在神经网络的历史上经常使用，现在已经很少用到了，他有两个主要缺点：
+<ul>
+<li><strong>Sigmoid函数饱和使梯度消失</strong>。sigmoid神经元有一个不好的特性，就是当神经元的激活在接近0或1处时会饱和：在这些区域，梯度几乎为0。回忆一下，在反向传播的时候，这个（局部）梯度将会与整个损失函数关于该门单元输出的梯度相乘。因此，如果局部梯度非常小，那么相乘的结果也会接近零，这会有效地“杀死”梯度，几乎就有没有信号通过神经元传到权重再到数据了。还有，为了防止饱和，必须对于权重矩阵初始化特别留意。比如，如果初始化权重过大，那么大多数神经元将会饱和，导致网络就几乎不学习了。</li>
+<li><strong>Sigmoid函数的输出不是零中心的</strong>。这个性质并不是我们想要的，因为在神经网络后面层中的神经元得到的数据将不是零中心的。这一情况将影响梯度下降的运作，因为如果输入神经元的数据总是正数（比如在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>=</mo><msup><mi>w</mi><mi>T</mi></msup><mi>x</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">f=w^Tx+b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.924661em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>中每个元素x都＞0），那么关于 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi></mrow><annotation encoding="application/x-tex">w</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span></span></span></span> 的梯度在反向传播的过程中，将会要么全部是正数，要么全部是负数（具体依整个表达式 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span></span></span></span> 而定）。这将会导致梯度下降权重更新时出现z字型的下降。然而，可以看到整个批量的数据的梯度被加起来后，对于权重的最终更新将会有不同的正负，这样就从一定程度上减轻了这个问题。因此，该问题相对于上面的神经元饱和问题来说只是个小麻烦，没有那么严重。</li>
+</ul>
+<h4 id="tanh"><a class="markdownIt-Anchor" href="#tanh"></a> Tanh</h4>
+<img src="https://bkimg.cdn.bcebos.com/pic/29381f30e924b8994bb77cac64061d950b7bf69f?x-bce-process=image/watermark,image_d2F0ZXIvYmFpa2U5Mg==,g_7,xp_5,yp_5/format,f_auto" srcset="/img/loading.gif" alt="img" style="zoom: 50%;" />
+$$
+tanh(x) = \frac{e^x-e^{-x}}{e^x+e^{-x}}
+$$
+tanh函数将实数值压缩到[-1,1]之间。和sigmoid一样，它也存在饱和问题，但是和sigmoid神经元不同的是，它的输出是零中心的。因此，在实际操作中，*tanh非线性函数比sigmoid非线性函数更受欢迎*。注意tanh神经元是一个简单放大的sigmoid神经元，具体说来就是：$tanh(x) = 2\sigma(2x)-1$
+<h4 id="relu"><a class="markdownIt-Anchor" href="#relu"></a> ReLU</h4>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210818172924.png" srcset="/img/loading.gif" alt="" /></p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mi>e</mi><mi>L</mi><mi>U</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">ReLU(x)=max(0,x)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mord mathdefault">e</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span></span></p>
+<p>当<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>≤</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x\le0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>时，梯度为0；<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">x&gt;0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>时，梯度为1。换句话说，这激活函数就是一个关于0的阈值。</p>
+<h5 id="优点"><a class="markdownIt-Anchor" href="#优点"></a> 优点：</h5>
+<ul>
+<li>**加速收敛：**相较于sigmoid和tanh函数，ReLU对于随机梯度下降的收敛有巨大的加速作用（ <a href="https://link.zhihu.com/?target=http%3A//www.cs.toronto.edu/~fritz/absps/imagenet.pdf">Krizhevsky </a>等的论文指出有6倍之多）。据称这是由它的线性，非饱和的公式导致的。</li>
+<li>**计算简单：**sigmoid和tanh神经元含有指数运算等耗费计算资源的操作，而ReLU可以简单地通过对一个矩阵进行阈值计算得到。</li>
+</ul>
+<h5 id="缺点"><a class="markdownIt-Anchor" href="#缺点"></a> 缺点：</h5>
+<ul>
+<li>在训练的时候，ReLU单元比较脆弱并且可能“死掉”。举例来说，当一个很大的梯度流过ReLU的神经元的时候，可能会导致梯度更新到一种特别的状态，在这种状态下神经元将无法被其他任何数据点再次激活。如果这种情况发生，那么从此所以流过这个神经元的梯度将都变成0。也就是说，这个ReLU单元在训练中将不可逆转的死亡，因为这导致了数据多样化的丢失。例如，如果学习率设置得太高，可能会发现网络中40%的神经元都会死掉（在整个训练集中这些神经元都不会被激活）。通过合理设置学习率，这种情况的发生概率会降低。</li>
+</ul>
+<h4 id="leaky-relu"><a class="markdownIt-Anchor" href="#leaky-relu"></a> Leaky ReLU</h4>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210818173434.png" srcset="/img/loading.gif" alt="" /></p>
+<p>Leaky ReLU是为解决“ReLU死亡”问题的尝试。ReLU中当x&lt;0时，函数值为0。而Leaky ReLU则是给出一个很小的负数梯度值，比如0.01。公式中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>是一个很小的常量。</p>
+<h4 id="prelu"><a class="markdownIt-Anchor" href="#prelu"></a> PReLU</h4>
+<p>PReLU就是将Leaky ReLU的参数<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>增加科学系的特性，采用带动量的更新方式进行更新。</p>
+<h4 id="maxout"><a class="markdownIt-Anchor" href="#maxout"></a> Maxout</h4>
+<p>Maxout是对ReLU和leaky ReLU的一般化归纳，它的函数是：<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">(</mo><msubsup><mi>w</mi><mn>1</mn><mi>T</mi></msubsup><mi>x</mi><mo>+</mo><msub><mi>b</mi><mn>1</mn></msub><mo separator="true">,</mo><msubsup><mi>w</mi><mn>2</mn><mi>T</mi></msubsup><mi>x</mi><mo>+</mo><msub><mi>b</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">max(w_1^Tx+b_1,w_2^Tx+b_2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0913309999999998em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord mathdefault">x</span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-2.4518920000000004em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.0894389999999998em;vertical-align:-0.24810799999999997em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-2.4518920000000004em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">b</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span>。</p>
+<p>这样Maxout神经元就拥有ReLU单元的所有优点（线性操作和不饱和），而没有它的缺点（死亡的ReLU单元）。然而和ReLU对比，它每个神经元的参数数量增加了一倍，这就导致整体参数的数量激增。</p>
+<p>Maxout的拟合能力是非常强的，它可以拟合任意的的凸函数。作者Goodfellow从数学的角度上也证明了这个结论，即只需2个 maxout 节点就可以拟合任意的凸函数了（相减），前提是”隐隐含层”节点的个数可以任意多。</p>
+<h3 id="参数更新方法"><a class="markdownIt-Anchor" href="#参数更新方法"></a> 参数更新方法</h3>
+<p>使用梯度与反向传播来更新参数。</p>
+<h4 id="随机梯度下降sgd"><a class="markdownIt-Anchor" href="#随机梯度下降sgd"></a> 随机梯度下降SGD</h4>
+<h5 id="普通更新"><a class="markdownIt-Anchor" href="#普通更新"></a> 普通更新</h5>
+<p>最简单的更新形式是沿着负梯度方向改变参数（因为梯度指向的是上升方向，但是我们通常希望最小化损失函数）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 普通更新</span><br>x += - learning_rate * dx<br></code></pre></td></tr></table></figure>
+<h5 id="动量更新momentum"><a class="markdownIt-Anchor" href="#动量更新momentum"></a> 动量更新（Momentum）</h5>
+<p>把梯度dx理解成力，力是有大小和方向的，而且力可以改变速度的大小和方向，并且速度可以累积。把权值v理解成速度，表示参数移动的方向以及大小，初始为0。梯度改变时逐渐加速或减速导致速度v改变，v在每一段时间（每一次更新）后改变参数的值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 动量更新</span><br>v = mu * v - learning_rate * dx <span class="hljs-comment"># 与速度融合</span><br>x += v <span class="hljs-comment"># 与位置融合</span><br></code></pre></td></tr></table></figure>
+<p>引入了一个初始化为0的变量<strong>v</strong>和一个超参数<strong>mu</strong>。说得不恰当一点，这个变量（mu）在最优化的过程中被看做<em>动量</em>（一般值设为0.9），但其物理意义与摩擦系数更一致。这个变量有效地抑制了速度，降低了系统的动能，不然质点在山底永远不会停下来。通过交叉验证，这个参数通常设为[0.5,0.9,0.95,0.99]中的一个。和学习率随着时间退火（下文有讨论）类似，动量随时间变化的设置有时能略微改善最优化的效果，其中动量在学习过程的后阶段会上升。一个典型的设置是刚开始将动量设为0.5而在后面的多个周期（epoch）中慢慢提升到0.99。</p>
+<h5 id="nesterov动量"><a class="markdownIt-Anchor" href="#nesterov动量"></a> Nesterov动量</h5>
+<p>先利用x往v方向前进一步的位置来计算梯度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">x_ahead = x + mu * v<br><span class="hljs-comment"># 计算dx_ahead(在x_ahead处的梯度，而不是在x处的梯度)</span><br>v = mu * v - learning_rate * dx_ahead<br>x += v<br></code></pre></td></tr></table></figure>
+<h4 id="逐参数适应学习率方法"><a class="markdownIt-Anchor" href="#逐参数适应学习率方法"></a> 逐参数适应学习率方法</h4>
+<h5 id="adagrad"><a class="markdownIt-Anchor" href="#adagrad"></a> Adagrad</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 假设有梯度和参数向量x</span><br>cache += dx**<span class="hljs-number">2</span><br>x += - learning_rate * dx / (np.sqrt(cache) + eps)<br></code></pre></td></tr></table></figure>
+<p>注意，变量<strong>cache</strong>的尺寸和梯度矩阵的尺寸是一样的，还跟踪了每个参数的梯度的平方和。这个一会儿将用来归一化参数更新步长，归一化是逐元素进行的。注意，接收到高梯度值的权重更新的效果被减弱，而接收到低梯度值的权重的更新效果将会增强。有趣的是平方根的操作非常重要，如果去掉，算法的表现将会糟糕很多。用于平滑的式子<strong>eps</strong>（一般设为1e-4到1e-8之间）是防止出现除以0的情况。Adagrad的一个缺点是，在深度学习中单调的学习率被证明通常过于激进且过早停止学习。</p>
+<h5 id="rmsprop"><a class="markdownIt-Anchor" href="#rmsprop"></a> RMSProp</h5>
+<p>用一种很简单的方式修改了Adagrad方法，让它不那么激进，单调地降低了学习率。具体说来，就是它使用了一个梯度平方的滑动平均：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">cache =  decay_rate * cache + (<span class="hljs-number">1</span> - decay_rate) * dx**<span class="hljs-number">2</span><br>x += - learning_rate * dx / (np.sqrt(cache) + eps)<br></code></pre></td></tr></table></figure>
+<p>decay_rate是一个超参数，常用的值是[0.9,0.99,0.999]。其中<strong>x+=<strong>和Adagrad中是一样的，但是</strong>cache</strong>变量是不同的。因此，RMSProp仍然是基于梯度的大小来对每个权重的学习率进行修改，这同样效果不错。但是和Adagrad不同，其更新不会让学习率单调变小。</p>
+<h5 id="adam"><a class="markdownIt-Anchor" href="#adam"></a> Adam</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">m = beta1*m + (<span class="hljs-number">1</span>-beta1)*dx<br>v = beta2*v + (<span class="hljs-number">1</span>-beta2)*(dx**<span class="hljs-number">2</span>)<br>x += - learning_rate * m / (np.sqrt(v) + eps)<br></code></pre></td></tr></table></figure>
+<p>这个更新方法看起来真的和RMSProp很像，除了使用的是平滑版的梯度<strong>m</strong>，而不是用的原始梯度向量<strong>dx</strong>。论文中推荐的参数值<strong>eps=1e-8, beta1=0.9, beta2=0.999</strong>。在实际操作中，我们推荐Adam作为默认的算法，一般而言跑起来比RMSProp要好一点。但是也可以试试SGD+Nesterov动量。完整的Adam更新算法也包含了一个偏置*（bias）矫正*机制，因为<strong>m,v</strong>两个矩阵初始为0，在没有完全热身之前存在偏差，需要采取一些补偿措施。</p>
+<h2 id="batch-normalization"><a class="markdownIt-Anchor" href="#batch-normalization"></a> Batch Normalization</h2>
+<h3 id="数据预处理"><a class="markdownIt-Anchor" href="#数据预处理"></a> 数据预处理</h3>
+<p>关于数据预处理我们有3个常用的符号，数据矩阵<strong>X</strong>，假设其尺寸是**[N x D]**（<strong>N</strong>是数据样本的数量，<strong>D</strong>是数据的维度）。有三种常用的预处理形式。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210819114546.png" srcset="/img/loading.gif" alt="" /></p>
+<ul>
+<li>
+<p><strong>均值减法（Mean subtraction</strong>）是预处理最常用的形式。它对数据中每个独立<em>特征</em>减去平均值，从几何上可以理解为在每个维度上都将数据云的中心都迁移到原点。在numpy中，该操作可以通过代码**X -= np.mean(X, axis=0)<strong>实现。而对于图像，更常用的是对所有像素都减去一个值，可以用</strong>X -= np.mean(X)**实现，也可以在3个颜色通道上分别操作。</p>
+</li>
+<li>
+<p><strong>归一化（Normalization）<strong>是指将数据的所有维度都归一化，使其数值范围都近似相等。有两种常用方法可以实现归一化。第一种是先对数据做零中心化（zero-centered）处理，然后每个维度都除以其标准差，实现代码为</strong>X /= np.std(X, axis=0)</strong>。第二种方法是对每个维度都做归一化，使得每个维度的最大和最小值是1和-1。这个预处理操作只有在确信不同的输入特征有不同的数值范围（或计量单位）时才有意义，但要注意预处理操作的重要性几乎等同于学习算法本身。在图像处理中，由于像素的数值范围几乎是一致的（都在0-255之间），所以进行这个额外的预处理步骤并不是很必要。</p>
+</li>
+<li>
+<p>**PCA和白化（Whitening）**是另一种预处理形式。在这种处理中，先对数据进行零中心化处理，然后计算协方差矩阵，它展示了数据中的相关性结构。PCA会将数据降维，留下方差最大的维度。通常使用PCA降维过的数据训练线性分类器和神经网络会达到非常好的性能效果，同时还能节省时间和存储器空间。白化操作的输入是特征基准上的数据，然后对每个维度除以其特征值来对数值范围进行归一化。该变换的几何解释是：如果数据服从多变量的高斯分布，那么经过白化后，数据的分布将会是一个均值为零，且协方差相等的矩阵。</p>
+</li>
+</ul>
+<h3 id="batch-normalization-2"><a class="markdownIt-Anchor" href="#batch-normalization-2"></a> Batch Normalization</h3>
+<p>使深层网络更容易训练的一种方法是使用更复杂的优化程序，如SGD+momentum、RMSProp或Adam。另一个策略是改变网络的架构，使其更易于培训。BN就是基于这种思想提出的算法。</p>
+<p>当机器学习方法的输入数据由均值和单位方差为零的不相关特征组成时，机器学习方法的效果会更好。在训练神经网络时，我们可以先对数据进行预处理，然后再将其输入到网络中去相关；这将确保网络的第一层看到遵循良好分布的数据。然而，即使我们对输入数据进行预处理，网络深层的激活后的数据可能不再是去相关的，也不再具有零均值或单位方差，因为它们是从网络的早期层输出的。更糟糕的是，在训练过程中，随着各层权值的更新，网络各层特征的分布会发生变化。</p>
+<p>BN层的具体做法是使用一小批数据来计算每一维度特征的平均值和标准差，然后做规范化，每个样本减去均值除以标准差，但有时候处理完之后的分布不一定是我们想要的（这样的规范反而会使网络表达能力下降），所以乘上缩放系数γ，加上偏移β。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210819181018.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p>根据公式以及计算图，编写正向传播和反向传播的代码。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210819204945.png" srcset="/img/loading.gif" alt="" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210819205020.png" srcset="/img/loading.gif" alt="" /></p>
+<h3 id="layer-normalization"><a class="markdownIt-Anchor" href="#layer-normalization"></a> Layer Normalization</h3>
+<p>对每一个样本单独归一化。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210819221047.png" srcset="/img/loading.gif" alt="" /></p>
+<p>如上图，BN是对N个样本做归一化，固定channel（特征维度）；LN是对一个样本的所有channel通道做归一化，固定批次；IN计算均值和标准差时，同时固定channel和batch(在一个样本内中的一个通道内)，对HW作平均，GN计算均值和标准差时，固定batch且对channel作分组(在一个样本内对通道作分组)，在分组内对HW作平均。</p>
+<p>具体到作业中，[N,D]N个样本D维度特征，BN是对N个样本做归一化，得到一个[D,]的平均向量（相当于一个平均样本）。LN是对每个样本做归一化，得到一个[N,]的平均向量（相当于N个平均样本呢）。</p>
+<h2 id="dropout"><a class="markdownIt-Anchor" href="#dropout"></a> Dropout</h2>
+<p>在训练的前向传递过程中随机概率p将一些输出设置为零，在测试时什么也不做（反向随机失活inverted dropout，普通的dropout在测试预测时也及进行随机失活），这些设置为零的输出在反向传播时也不向后传递梯度。一般会把这一层加在激活层之后。</p>
+<h2 id="cnn"><a class="markdownIt-Anchor" href="#cnn"></a> CNN</h2>
+<p>主要是实现卷积层conv、最大汇聚层max_pool、空间批量规范化层spatial_batchnorm。</p>
+<h4 id="conv"><a class="markdownIt-Anchor" href="#conv"></a> conv</h4>
+<p><img src="https://img-blog.csdnimg.cn/20200108193858419.gif" srcset="/img/loading.gif" alt="img" /></p>
+<p>卷积层前向传播的核心操作如下所示，结合上图，主要理解每一个卷积核的通道数都与输入的数据相同，同时有每个卷积核对应输出的一个通道。上图中，每一个卷积核均为3通道和图片相同，逐步滑过图片并加上bias成为输出的一个通道。本次作业中我们要做的就时找出每个每一个滑动的小窗口（使用切片）和卷积核相乘，形成一个单通道的feature map后，再加上bias，成为最终输出的一个通道。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># naive实现</span><br><span class="hljs-keyword">for</span> index <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N):  <span class="hljs-comment"># 每个图片输入</span><br>	neuron = <span class="hljs-number">0</span><br>	<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, H_pad - HH + <span class="hljs-number">1</span>, stride):  <span class="hljs-comment"># 最后一个在H_pad - HH,所以要+1</span><br>		<span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, W_pad - WW + <span class="hljs-number">1</span>, stride):<br>			x_col[:, neuron] = x_pad[index, :, i:i + HH, j:j + WW].reshape(C * HH * WW)<br>			neuron += <span class="hljs-number">1</span><br>	out[index] = (np.dot(w_row, x_col) + b.reshape(F, <span class="hljs-number">1</span>)).reshape(F, out_H, out_W)<br></code></pre></td></tr></table></figure>
+<p>反向传播也是类似操作，注意其公式根本上来说类似于<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>w</mi><mi>x</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">wx+b</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault">b</span></span></span></span>。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># naive实现</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(outH):<br>	<span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(outW):<br>		<span class="hljs-comment"># 当前位置对应的图像的块</span><br>		x_pad_t = x_pad[:, :, stride * i:stride * i + HH, stride * j:stride * j + WW]  <span class="hljs-comment"># N,C,HH,WW</span><br>		<span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N):<br>			dx[p, :, stride * i:stride * i + HH, stride * j:stride * j + WW] += np.<span class="hljs-built_in">sum</span>(dout[p, :, i, j][:, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>] * w, axis=<span class="hljs-number">0</span>  <span class="hljs-comment"># F, * (F, C, HH, WW))  # C,HH,WW</span><br>		<span class="hljs-keyword">for</span> q <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(F):<br>			<span class="hljs-comment"># dout * x  C，HH,WW</span><br>			dw[q] += np.<span class="hljs-built_in">sum</span>(dout[:, q, i, j][:, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>] * x_pad_t,axis=<span class="hljs-number">0</span>)  <span class="hljs-comment"># N, * N,C,HH,WW</span><br>dx = dx[:, :, pad:-pad, pad:-pad]<br></code></pre></td></tr></table></figure>
+<h4 id="max_pool"><a class="markdownIt-Anchor" href="#max_pool"></a> max_pool</h4>
+<p>最大汇聚层的操作相对简单，和卷积层类似，用一个滑动滑过后取最大值即可，反向传播时，也旨在最大的点传播梯度。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># max_pool_forward_naive</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(outH):<br>	<span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(outW):<br>	out[:, :, i, j] = np.<span class="hljs-built_in">max</span>(x[:, :, i * stride:i * stride + pool_height, j * stride:j * stride + pool_width],axis=(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>))<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># max_pool_backward_naive</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(outH):<br>	<span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(outW):<br>		x_t = x[:, :, i * stride:i * stride + pool_height, j * stride:j * stride + pool_width]<br>		mask = x_t == np.<span class="hljs-built_in">max</span>(x_t, axis=(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>))[:, :, <span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>]<br>		dx[:, :, i * stride:i * stride + pool_height, j * stride:j * stride + pool_width] = dout[:, :, i, j][:, :,<span class="hljs-literal">None</span>, <span class="hljs-literal">None</span>] * mask<br></code></pre></td></tr></table></figure>
+<h4 id="spatial_batchnorm"><a class="markdownIt-Anchor" href="#spatial_batchnorm"></a> spatial_batchnorm</h4>
+<p>空间批量规范化就是上一次作业的BN算法，将channel固定，把batch、H、W进行平均，得到一个[C，]的平均向量。</p>
+<p>spatial_groupnorm在计算均值和标准差时，固定batch且对channel作分组(在一个样本内对通道作分组)，在分组内对HW作平均，即在N个批次和G个分组内进行平均。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">x = np.reshape(x, [N, G, C // G, H, W]) <span class="hljs-comment"># C/G向下取整 </span><br>mean = np.mean(x, (<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>), keepdims=<span class="hljs-literal">True</span>)<br>var = np.var(x, (<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>), keepdims=<span class="hljs-literal">True</span>)<br>out = (x - mean) / np.sqrt(var + eps)<br>out = out.reshape([N, C, H, W])<br>cache = x, G, gamma, beta, out.copy(), mean, var, eps<br>out = out * gamma + beta<br></code></pre></td></tr></table></figure>
+<h2 id="pytorch"><a class="markdownIt-Anchor" href="#pytorch"></a> Pytorch</h2>
+<p>cs231n的作业作为教程很不错了，这里记录一下一个pytorch搭建模型、训练的模板。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyModel</span>(<span class="hljs-params">nn.Module</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, in_channel, channel_1, channel_2, num_classes</span>):</span><br>        <span class="hljs-built_in">super</span>().__init__()<br>        <span class="hljs-comment"># 1、函数式声明</span><br>        self.conv1 = nn.Conv2d(in_channel,channel_1,<span class="hljs-number">5</span>,padding=<span class="hljs-number">2</span>)<br>        self.conv2 = nn.Conv2d(channel_1,channel_2,<span class="hljs-number">3</span>,padding=<span class="hljs-number">1</span>)<br>        self.fc = nn.Linear(channel_2*<span class="hljs-number">32</span>*<span class="hljs-number">32</span>,num_classes)<br>        self.relu = nn.ReLU()<br>        <span class="hljs-comment"># ...</span><br>        <br>        <span class="hljs-comment"># 2、序列模型</span><br>        self.features = nn.Sequential()<br>        self.classifier = nn.Sequential()<br>        <br>        <span class="hljs-comment"># optional 初始化</span><br>        nn.init.kaiming_normal_(self.conv1.weight)<br>        nn.init.kaiming_normal_(self.conv2.weight)<br>        nn.init.kaiming_normal_(self.fc.weight)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span>(<span class="hljs-params">self, x</span>):</span><br>        <span class="hljs-comment"># 注意数据格式</span><br>        <span class="hljs-comment"># 1、函数式</span><br>        scores = <span class="hljs-literal">None</span><br>        out1 = self.relu(self.conv1(x))<br>        out2 = self.relu(self.conv2(out1))<br>        scores = self.fc(flatten(out2))<br>        <span class="hljs-keyword">return</span> scores<br>    	        <br>        <span class="hljs-comment"># 2、序列模型 </span><br>        x=self.features(x)<br>        x=x.view(x.size(<span class="hljs-number">0</span>),<span class="hljs-number">256</span>*<span class="hljs-number">1</span>*<span class="hljs-number">1</span>)<br>        x=self.classifier(x)<br>        <span class="hljs-keyword">return</span> x<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><code class="hljs python">model = MyModel() <span class="hljs-comment"># 注意参数</span><br>model = model.to(device=device)  <span class="hljs-comment"># move the model parameters to CPU/GPU</span><br><br><span class="hljs-comment"># 根据情况修改</span><br>loss_function = nn.CrossEntropyLoss() <br>optimizer = optim.Adam(model.parameters(), lr=<span class="hljs-number">0.0003</span>)<br><br>acc_list = []<br>loss_list = []<br>best_acc = <span class="hljs-number">0</span><br>epochs = <span class="hljs-number">3</span><br><span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epochs):<br>    model.train()  <span class="hljs-comment"># put model to training mode</span><br>    running_loss = <span class="hljs-number">0.0</span><br>    <span class="hljs-keyword">for</span> step, (x, y) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(loader_train):<br>        <span class="hljs-comment"># e.g. images &amp; labels</span><br>        x = x.to(device=device, dtype=dtype)  <span class="hljs-comment"># move to device, e.g. GPU</span><br>        y = y.to(device=device, dtype=torch.long)<br><br>        scores = model(x)<br>        loss = loss_function(scores, y)<br><br>        <span class="hljs-comment"># 将优化器将更新的变量的所有梯度归零</span><br>        optimizer.zero_grad()<br>        <span class="hljs-comment"># 反向传播,计算模型中每个参数的损失梯度。</span><br>        loss.backward()<br>        <span class="hljs-comment"># 使用反向传播计算的梯度更新模型的参数</span><br>        optimizer.step()<br>        <br>        <span class="hljs-comment"># 实时输出loss数据</span><br>        running_loss += loss.item()<br>        <span class="hljs-comment"># 输出进度条</span><br>        rate = (step + <span class="hljs-number">1</span>) / <span class="hljs-built_in">len</span>(loader_train)<br>        a = <span class="hljs-string">&quot;*&quot;</span> * <span class="hljs-built_in">int</span>(rate * <span class="hljs-number">50</span>)<br>        b = <span class="hljs-string">&quot;.&quot;</span> * <span class="hljs-built_in">int</span>((<span class="hljs-number">1</span> - rate) * <span class="hljs-number">50</span>)<br>        print(<span class="hljs-string">&quot;\rtrain loss: &#123;:^3.0f&#125;%[&#123;&#125;-&gt;&#123;&#125;]&#123;:.3f&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-built_in">int</span>(rate * <span class="hljs-number">100</span>), a, b, loss), end=<span class="hljs-string">&quot;&quot;</span>)<br>        print()<br>        <br><br>    <span class="hljs-comment"># validate</span><br>    model.<span class="hljs-built_in">eval</span>()<br>    acc = <span class="hljs-number">0.0</span>  <span class="hljs-comment"># accumulate accurate number / epoch</span><br>    val_num = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">with</span> torch.no_grad():<br>        <span class="hljs-keyword">for</span> x, y <span class="hljs-keyword">in</span> loader_val:<br>            x = x.to(device=device, dtype=dtype)  <span class="hljs-comment"># move to device, e.g. GPU</span><br>            y = y.to(device=device, dtype=torch.long)<br>            outputs = model(x)  <span class="hljs-comment"># eval model only have last output layer</span><br>            predict_y = torch.<span class="hljs-built_in">max</span>(outputs, dim=<span class="hljs-number">1</span>)[<span class="hljs-number">1</span>]<br>            acc += (predict_y == y).<span class="hljs-built_in">sum</span>().item()<br>            val_num += predict_y.size(<span class="hljs-number">0</span>)<br>        val_accurate = acc / val_num<br>        acc_list.append(val_accurate)<br>        loss_list.append( running_loss / step)<br>        <span class="hljs-keyword">if</span> val_accurate &gt; best_acc:<br>            best_acc = val_accurate<br>            <span class="hljs-comment"># torch.save(net.state_dict(), save_path)</span><br>        print(<span class="hljs-string">&#x27;[epoch %d] train_loss: %.3f  test_accuracy: %.3f  loss&#x27;</span> %<br>              (epoch + <span class="hljs-number">1</span>, running_loss / step, val_accurate))<br><br>print(<span class="hljs-string">&#x27;Best_acc = %.3f&#x27;</span>% (best_acc))        <br>print(<span class="hljs-string">&#x27;Finished Training&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/21798784?refer=intelligentunit">https://zhuanlan.zhihu.com/p/21798784?refer=intelligentunit</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/cs231n/">cs231n</a>
+                    
+                      <a class="hover-with-bg" href="/tags/deeplearning/">deeplearning</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/20/cs231n-assignment3%E4%BD%9C%E4%B8%9A%E7%AC%94%E8%AE%B0/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">cs231n-assignment3作业笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/16/cs231n-assignment1%E4%BD%9C%E4%B8%9A%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">cs231n-assignment1作业笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

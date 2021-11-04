@@ -1,0 +1,588 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/headpic.jfif">
+  <link rel="icon" type="image/png" href="/image/headpic.jfif">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PokeStar">
+  <meta name="keywords" content="">
+  <title>论文阅读笔记-12 in 1 - PokeStar&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.pokestar.wang","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"iBJ8IeKzxC1t8gL78pOhBgve-9Nh9j0Va","app_key":"ikqlgnddeJu2RBBeFTSuRAyx","server_url":"https://ibj8iekz.lc-cn-e1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>PokeStar的个人小站</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/image/bg/North-America-Nebula-Deepscape_Liron-Gertsman.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="论文阅读笔记-12 in 1">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-16 21:32" pubdate>
+        2021年10月16日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      39
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">论文阅读笔记-12 in 1</h1>
+            
+            <div class="markdown-body">
+              <h2 id="论文要点"><a class="markdownIt-Anchor" href="#论文要点"></a> 论文要点</h2>
+<p>Multi-Task Vision and Language Representation Learning</p>
+<ul>
+<li>
+<p>基于ViLBERT开发了一个多任务模型——单个模型适用于四大类12个下游任务，包括视觉问答VQA、基于标题的图像检索caption-based image retrieval、接地引用表达式grounding referring expressions和多模态验证multi-modal verification.。 结果不仅表明单个模型可以执行所有这些任务，而且联合训练多个下游任务与相同体系结构的单任务训练相比可以提高性能。</p>
+</li>
+<li>
+<p>大规模多任务学习具有挑战性，因为数据集的大小和难度可能不同。为了解决这些问题，文章引入了一个动态的stop-and-go训练调度器、任务相关的输入令牌task-dependent input tokens和简单的超参数启发法simple hyper-parameter heuristics。使用文章提出的方法，能够使用不同的数据集训练许多多任务模型——评估不同视觉和语言任务之间的关系，以及它们在一起训练时的表现。</p>
+</li>
+<li>
+<p>系统地分析了不同视觉和语言数据集和任务之间的联合训练关系，并提出了 Clean V&amp;L 多任务设置，确保跨任务不会出现训练测试泄漏。</p>
+</li>
+</ul>
+<h2 id="引入"><a class="markdownIt-Anchor" href="#引入"></a> 引入</h2>
+<p>目前视觉基础语言理解的研究领域是许多专门任务的拼凑，如VQA或r caption generation字幕生成，每个任务都由少量数据集支持。因此，这一领域的进展通过独立改进为每个特定任务和数据集设计和训练的定制模型来衡量。</p>
+<p>之前的模型预先训练自监督任务的通用架构，以学习通用视觉语言表示，然后对特定数据集进行微调；本文学习一个通用模型结构，适用所有任务而不是对单一任务再设计模型。</p>
+<h2 id="多模态任务"><a class="markdownIt-Anchor" href="#多模态任务"></a> 多模态任务</h2>
+<p>使用了12个流行的多模态数据集，可分为四类：</p>
+<p>**Vocab-based VQA：**给定一个图像和一个自然语言问题，从固定词汇表中选择一个答案。 我们考虑了该组的三个流行数据集——VQAv2、 GQA 和 Visual Genome (VG) QA。</p>
+<p>**Image Retrieval：**给定一个标题和一组图像，检索标题最能描述的目标图像。 我们考虑了这个任务组的 COCO和 Flickr30K字幕数据集。</p>
+<p>**Referring Expressions：**给定自然语言表达式和图像，确定表达式所指的目标区域。 从简单的名词短语到多轮对话，表达式在数据集之间可能会有很大差异。 我们考虑 RefCOCO(+/g) 中的短语基础，Visual7W中的指向问题，以及 GuessWhat中的对话序列。 我们注意到这些语言输入在细节和结构方面差异很大。</p>
+<p>**Multi-modal Verification：**给定一个或多个图像和一个自然语言语句，判断其正确性或预测它们的语义关系。 我们考虑 NLVR2和 SNLI-VE。 在 NLVR2 中，给出了两个图像，并且该陈述语句必须为真才能为真。 在 SNLI-VE 中，图像-语句对被分类为表示蕴涵、矛盾或中性。 即图像内容是否证实、反驳或不足以评论相应陈述的真实性。</p>
+<h3 id="a-clean-vl-multi-task-setup"><a class="markdownIt-Anchor" href="#a-clean-vl-multi-task-setup"></a> A Clean V&amp;L Multi-Task Setup</h3>
+<p>上述多模态任务是互相建立的，可能有重叠的图像，某一任务的测试图像或许已经在其他任务中出现了，如下表。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20211017112014.png" srcset="/img/loading.gif" alt="" /></p>
+<p>为了避免从其他任务的注释中泄露信息，我们为 V&amp;L 任务提出了一个干净的多任务拆分a cleaned multi-task split for V&amp;L tasks，其中将测试图像从所有任务的训练/验证集中删除。 我们强调测试集没有以任何方式修改，因此我们的结果与之前的工作相当。 清理导致跨数据集的训练数据平均减少约 11%。</p>
+<h2 id="模型结构"><a class="markdownIt-Anchor" href="#模型结构"></a> 模型结构</h2>
+<p>基本结构采用<a href="https://blog.pokestar.wang/2021/10/14/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-VILBERT/">VILBERT</a>，输入给定的一幅图像 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span></span></span></span> ，首先将其表示为一组图像区域特征 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>v</mi><mn>0</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>v</mi><mi>τ</mi></msub></mrow><annotation encoding="application/x-tex">v_0,…,v_{\tau}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.1132em;">τ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ，一组文本输入 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>w</mi><mn>0</mn></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>w</mi><mi>T</mi></msub></mrow><annotation encoding="application/x-tex">w_0,…,w_T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ，模型最终将其分别转化为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>h</mi><mrow><mi>v</mi><mn>0</mn></mrow></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>h</mi><mrow><mi>v</mi><mi>τ</mi></mrow></msub><mi mathvariant="normal">和</mi><msub><mi>h</mi><mrow><mi>w</mi><mn>0</mn></mrow></msub><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><msub><mi>h</mi><mrow><mi>w</mi><mi>T</mi></mrow></msub></mrow><annotation encoding="application/x-tex">h_{v0},…,h_{v\tau} 和 h_{w0},…,h_{wT}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="mord mathdefault mtight" style="margin-right:0.1132em;">τ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">和</span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span><span class="mord mtight">0</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02691em;">w</span><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110141036515.png" srcset="/img/loading.gif" alt="" /></p>
+<p>VILBERT中有两个预训练任务，遮蔽多模态建模masked multi-modal modelling 和多模态对齐预测multi-modal alignment prediction.</p>
+<p>文章对这个预训练过程进行了两个重要的修改。 首先，在屏蔽视觉区域时，我们还会屏蔽具有显着重叠（&gt; 0.4 IoU）的其他区域，以避免泄漏视觉信息。 这迫使模型更加依赖语言来预测图像内容。 其次，在对多模态对齐预测的负（不匹配）标题进行采样时，我们不会强制执行掩蔽多模态建模损失。 这将有效去除负样本引入的噪声。</p>
+<h3 id="多任务学习"><a class="markdownIt-Anchor" href="#多任务学习"></a> 多任务学习</h3>
+<p>我们考虑一个简单的多任务模型，其中每个任务都有一个特定于任务的“头部”网络，该网络从一个通用的、共享的“主干”ViLBERT 模型分支出来。学习一个共享的主干模型，其参数为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>θ</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">\theta_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> ，以及为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>τ</mi></mrow><annotation encoding="application/x-tex">\tau</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.1132em;">τ</span></span></span></span> 个task学习特定的 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>τ</mi></mrow><annotation encoding="application/x-tex">\tau</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.1132em;">τ</span></span></span></span> 个层 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">{</mo><msub><mi>θ</mi><mi>t</mi></msub><msubsup><mo stretchy="false">}</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mi>τ</mi></msubsup></mrow><annotation encoding="application/x-tex">\{\theta_t\}^{\tau}_{t=1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">}</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-2.4518920000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.1132em;">τ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span></span></span></span>。模型需要学习到将所有任务的loss均降为最小的参数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span></span></span></span> 。</p>
+<p>**Task Token:**不同的任务可能需要不同的处理后的输入token。 我们使用task token <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mi>A</mi><mi>S</mi><msub><mi>K</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">TASK_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 来扩充查询query，新的输入格式为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">{</mo><mi>I</mi><mi>M</mi><mi>G</mi><mi mathvariant="normal">，</mi><msub><mi>v</mi><mn>1</mn></msub><mi mathvariant="normal">，</mi><mo>…</mo><mi mathvariant="normal">，</mi><msub><mi>v</mi><mi>n</mi></msub><mi mathvariant="normal">，</mi><mi>C</mi><mi>L</mi><mi>S</mi><mi mathvariant="normal">，</mi><mi>T</mi><mi>A</mi><mi>S</mi><msub><mi>K</mi><mi>t</mi></msub><mi mathvariant="normal">，</mi><msub><mi>w</mi><mn>1</mn></msub><mi mathvariant="normal">，</mi><mo>…</mo><mi mathvariant="normal">，</mi><msub><mi>w</mi><mi>m</mi></msub><mi mathvariant="normal">，</mi><mi>S</mi><mi>E</mi><mi>P</mi><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">\{IMG，v_1，…，v_n，CLS，TASK_t，w_1，…，w_m，SEP\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">{</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mord mathdefault" style="margin-right:0.10903em;">M</span><span class="mord mathdefault">G</span><span class="mord cjk_fallback">，</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord cjk_fallback">，</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord mathdefault">L</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord cjk_fallback">，</span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord cjk_fallback">，</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord cjk_fallback">，</span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mord mathdefault" style="margin-right:0.05764em;">E</span><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="mclose">}</span></span></span></span> 。然后，体系结构可以自下而上的方式利用此任务信息。在下文中，我们将按任务组描述特定任务的头部网络。</p>
+<p>**Vocab-Based VQA Output:**将整体图像-问题表示作为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>h</mi><mrow><mi>I</mi><mi>M</mi><mi>G</mi></mrow></msub></mrow><annotation encoding="application/x-tex">h_{IMG}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07847em;">I</span><span class="mord mathdefault mtight" style="margin-right:0.10903em;">M</span><span class="mord mathdefault mtight">G</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>h</mi><mrow><mi>C</mi><mi>L</mi><mi>S</mi></mrow></msub></mrow><annotation encoding="application/x-tex">h_{CLS}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span><span class="mord mathdefault mtight">L</span><span class="mord mathdefault mtight" style="margin-right:0.05764em;">S</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示之间的按元素乘积进行计算。将基于vocab的VQA视为一项多标签分类任务——根据每个答案与真实答案的相关性，为每个答案分配一个软目标分数。通过在整体表示上使用两层MLP计算一组预定义答案A的分数：</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20211017145521.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.03588em;">σ</span></span></span></span> 是sigmoid函数。由于答案词汇的差异，VQA和VG QA共享MLP和答案词汇，而GQA学习一个单独的词汇。</p>
+<p>**Image Retrieval Output:**图像与问题表示与之前相同，计算二者的匹配分数：<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20211017145942.png" srcset="/img/loading.gif" style="zoom:67%;" /></p>
+<p>参数 W是d*1的矩阵，在COCO和Flickr30k图像检索任务中共享。与VILBERT一样，训练了一个 4-way multiple-choice against hard-negatives selected off-line 之后将其固定. 近期工作使用了 online hard-negative mining，但这计算量巨大</p>
+<p>**Referring Expressions Output:**给定引用表达式Referring Expressions，对一组区域提议region proposal重新排序。 我们将每个图像区域 i 的最终表示 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>h</mi><msub><mi>v</mi><mi>i</mi></msub></msub></mrow><annotation encoding="application/x-tex">h_{v_i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9445399999999999em;vertical-align:-0.2501em;"></span><span class="mord"><span class="mord mathdefault">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139199999999997em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3280857142857143em;"><span style="top:-2.357em;margin-left:-0.03588em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2501em;"><span></span></span></span></span></span></span></span></span></span> 传递到可学习投影矩阵 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>W</mi><mi>r</mi></msub><mo>∈</mo><msup><mi>R</mi><mrow><mi>d</mi><mo>×</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">W_r ∈ R^{d\times 1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="mbin mtight">×</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span> 中以预测匹配分数。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20211017153114.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p>请注意，Q 可以是基于不同任务（RefCOCO+/g、Visual7W、GuessWhat）的短语、问题或对话。 W_r 在所有Referring Expression任务之间共享。</p>
+<p>**Multi-modal Verification Output:**以NLVR2为例，输入是两个图像（<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>I</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">I_0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>I</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">I_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>）和一个语句Q的串联，模型必须根据给定图像判断的语句的有效性。 我们认为这是一个分类问题，给出了一个embadding，它编码了两个图像语句对 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><msub><mi>I</mi><mn>0</mn></msub><mo separator="true">,</mo><mi>Q</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(I_0, Q)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">Q</span><span class="mclose">)</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><msub><mi>I</mi><mn>1</mn></msub><mo separator="true">,</mo><mi>Q</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(I_1, Q)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">Q</span><span class="mclose">)</span></span></span></span> 。 输出概率由带有 softmax 的 2 层 MLP 预测：</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20211017155509.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p>对于SNLI-VE，输入是单个图像和语句。因此，我们学习同一形式的单独分类器，从输入中预测情绪（蕴涵、中立、矛盾）。</p>
+<h3 id="大规模多任务学习"><a class="markdownIt-Anchor" href="#大规模多任务学习"></a> 大规模多任务学习</h3>
+<p>拥有 6 个任务头、12 个数据集和超过 440 万个单独的训练实例导致训练我们的多任务 ViLBERT 模型是一项艰巨的任务。 而且不同的数据集数量级不同，训练难度也不同。当单独训练时，RefCOCOg 在 5K 次迭代中收敛，而 VQAv2 需要 84K 次迭代（超过 16 倍）。 下面，我们将详细介绍我们的多任务训练方法和技术来克服这些挑战。</p>
+<p>**Pretraining.**所有模型都首先在Conceptual Caption 数据集上进行预训练。</p>
+<p>**Round-Robin Batch-Level Sampling.**我们考虑了一种round-robin batch-level 的采样机制，它从多任务训练开始就循环执行每个任务。 因此，一个多任务迭代由每个任务按顺序forwarding一个batch更新参数组成。</p>
+<p>**Dynamic Stop-and-Go.**如前所述，不同的任务具有不同的难度和数据集大小。因此，简单地在所有任务中循环可能会大大过度训练较小的任务，从而导致过度拟合。通常，在早期停止训练小任务可以解决这种现象；然而，在多任务训练中停止任务会带来灾难性遗忘问题，因为基础网络会因其他任务而随时间漂移。本文使用动态停止前进（DSG）来解决这个问题。</p>
+<ol>
+<li>
+<p>监控每一个task的验证集的loss <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>s</mi><mi>t</mi></msub></mrow><annotation encoding="application/x-tex">s_t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，在每一个epoch之后都重新计算它。</p>
+</li>
+<li>
+<p>如果经过2个epoch之后，性能提升小于0.1%，那么就认为这个任务收敛了，将其设置为停止stop。</p>
+</li>
+<li>
+<p>停止stop模式的task，只在每个iter-gap (∆) iterations更新。</p>
+</li>
+<li>
+<p>如果验证集的loss下降幅度（相比最好时的性能）达到0.5%，将其设置为go模式继续训练。</p>
+</li>
+</ol>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20211017162738.png" srcset="/img/loading.gif" alt="" /></p>
+<p>**Curriculum Learning课程学习.**受先前多任务文献 [4] [31] 的启发，我们尝试了基于任务难度的课程和反课程策略。 具体来说，对于反课程，我们首先在最慢收敛的任务组 G1（基于词汇的 VQA）上进行训练，然后再开始完整的循环多任务训练。 与课程设置相反，我们首先在我们最快收敛的任务组 G3（参考表达式）上进行训练。 与之前的观察 [31, 33] 不同，我们发现，当与本节中提出的其他策略相结合时，不使用课程会带来卓越的表现。</p>
+<p><strong>Setting Multi-Task Hyperparameters.</strong></p>
+<p>根据为单任务训练中的每个任务调整的超参数来识别简单的启发式方法。</p>
+<p>*batch批量大小：*对于多任务，我们会为每个任务的单任务训练调整批量大小。</p>
+<p><em>Warm-up Duration预热持续时间:</em>  我们发现设置相对于最大数据集的warm-up duration 很重要。 具体来说，我们在 η ∗ N 次迭代中运行线性warm-up，其中N是在单个任务设置中训练任何数据集所需的最大迭代次数。。 当预热时间较短时，我们观察到较难的任务的性能显著下降。 我们在实验中将 η 设置为 0.1</p>
+<p><em>Loss Scaling:</em> 我们的模型具有共享参数和特定于任务的参数，我们发现保持单独的学习率很重要。 对于共享的基础模型，我们将基础学习率设置为所有单任务数据集参数的最小值。 为了适应每个数据集的可变学习率，我们通过任务目标学习率与基本学习率的比率来缩放每个数据集的任务损失。</p>
+<h2 id="实验"><a class="markdownIt-Anchor" href="#实验"></a> 实验</h2>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20211017171140.png" srcset="/img/loading.gif" alt="" /></p>
+<p>实验发现，12个任务联合训练带来了精度的提升，但是G4任务的加入会导致一定程度上精度下降。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20211017171238.png" srcset="/img/loading.gif" alt="" /></p>
+<p>我们从代表性任务分析中观察到，G4 在联合训练期间往往会对其他组产生负面影响。 为了在所有任务上验证这一观察结果，我们训练了一个没有 G4 的 All-Task 模型（第 5 行）。 该模型实现了更高的平均值。 与完整 AT 模型的 67.39 相比，G1+G2+G3 的得分为 67.96。</p>
+<p>理由推测：NLVR2 (G4) 为每个描述呈现两个图像，通常一个匹配而另一个不匹配。 尽管与一张图像对齐，但整个实例是负面的。 我们推测这种监督可能会干扰 Flickr30k 中的标准标题图像对齐目标。</p>
+<h2 id="预训练"><a class="markdownIt-Anchor" href="#预训练"></a> 预训练</h2>
+<p>本文对<strong>多模态对齐预测multimodal alignment prediction任务有修改</strong>，最近的工作发现在没有此预训练目标的非图像检索任务中有更好的性能。在自然语言理解任务中也发现了类似的观察结果。原因是对于未对齐的图像标题对（负样本），相当于迫使模型根据不正确的配对数据预测丢失的图像或文本区域，文章发现，在这种设置中，模型将学习更糟糕的上下文表示。所以文章只对对齐的图像标题对执行掩码多模态建模任务，而不是删除多模态对齐预测任务。这将有效地消除负采样引入的噪声。</p>
+<p><strong>屏蔽重叠区域</strong>。 与词嵌入不同，视觉特征嵌入（从预训练的 Faster-RCNN 中提取）由于重叠的图像区域有很多重复。 为了避免从其他元素的视觉嵌入中泄漏视觉线索，VL-BERT在应用 Faster R-CNN 之前将掩码 RoI 中的像素设置为零。 然而，具有边界信息的重叠图像块仍可能会泄露掩码 RoI 的视觉线索。 我们以更积极的方式屏蔽重叠的图像区域——任何与屏蔽区域重叠 40% IOU 或更多的视觉嵌入也被屏蔽。经此改进后，模型性能有了进步。</p>
+<h3 id="模型细节"><a class="markdownIt-Anchor" href="#模型细节"></a> 模型细节</h3>
+<p>图像特征是从在视觉基因组 (VG) 上训练的 ResNeXT-152 Faster-RCNN 模型中提取的，具有属性损失。 我们的模型首先从预训练的 BERT 权重 [14] 中初始化。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20211017205503.png" srcset="/img/loading.gif" alt="" /></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/deeplearning/">deeplearning</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/16/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-VILLA/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">论文阅读笔记-VILLA</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/14/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-UNITER/">
+                        <span class="hidden-mobile">论文阅读笔记-UNITER</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
