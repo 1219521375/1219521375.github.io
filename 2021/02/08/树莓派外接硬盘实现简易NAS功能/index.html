@@ -1,0 +1,550 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/headpic.jfif">
+  <link rel="icon" type="image/png" href="/image/headpic.jfif">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PokeStar">
+  <meta name="keywords" content="">
+  <title>树莓派外接硬盘实现简易NAS功能 - PokeStar&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.pokestar.wang","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"iBJ8IeKzxC1t8gL78pOhBgve-9Nh9j0Va","app_key":"ikqlgnddeJu2RBBeFTSuRAyx","server_url":"https://ibj8iekz.lc-cn-e1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>PokeStar的个人小站</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/image/bg/North-America-Nebula-Deepscape_Liron-Gertsman.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="树莓派外接硬盘实现简易NAS功能">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-08 13:04" pubdate>
+        2021年2月8日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">树莓派外接硬盘实现简易NAS功能</h1>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>众所周知，树莓派又叫吃灰派，在下这个树莓派大一入手，一直在家默默吃灰到大三，着实惭愧。将它用起来的契机，是这场疫情导致在家呆了半年，所谓饱暖思淫欲，吃饱没事干，就想着找点好玩的事情干干，正好家里有一台古老的PC，配置是E8200，2g内存，当初就是在这台丐得不行的机子上玩mc、给手机刷机。。。上了大学之后就看不上这个配置放那吃灰了。有了这个空就想着给这个机子弄个用途。想来想去，做成NAS吧！早就听闻NAS的种种好处，就鼓捣鼓捣给它刷了黑群晖，不过运行了几天就出现主板电池没电，换了电池还是有开不了机的问题，就懒得去修了让它寿终正寝吧，但是尝到了鼓捣的甜头的我又开始把目光转向了树莓派，树莓派可玩性就太强了，综合考虑，我给他刷了openwrt用来科学上网，给我的卧室带来了free的上网体验。这篇文章就是基于树莓派的openwrt系统，外接一块硬盘实现的一次探索。</p>
+<h2 id="准备工作环境"><a class="markdownIt-Anchor" href="#准备工作环境"></a> 准备工作&amp;环境</h2>
+<p>一块刷入了openwrt的树莓派，具体刷入教程网上有很多，本人使用的固件来自https://mlapp.cn/369.html，这位大佬做的固件很不错，各类插件齐全，界面也很好看。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210209110514.png" srcset="/img/loading.gif" alt="" /></p>
+<h2 id="配置外接硬盘"><a class="markdownIt-Anchor" href="#配置外接硬盘"></a> 配置外接硬盘</h2>
+<p>一块移动硬盘，我这里已经提前格式化为ext4系统了，不确定其他文件类型能否被openwrt识别。</p>
+<p>插入硬盘之后openwrt会进行自动挂载，可以在磁盘管理与挂载点中查看。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210209113653.png" srcset="/img/loading.gif" alt="" /></p>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210209113735298.png" srcset="/img/loading.gif" alt="image-20210209113735298" /></p>
+<p>若没有进行自动挂载，需要在挂载点中手动挂载。不过个人认为磁盘管理中有识别到<code>/dev/sda</code>等应该就可以进行后续操作。</p>
+<p>其中<code>sda</code>即指第一块硬盘，<code>sda1</code>指<code>sda</code>硬盘的第一个分区，后续分区为<code>sda2</code>，<code>sda3</code>……</p>
+<p>第二、三块硬盘即为<code>sdb</code>、<code>sdc</code>……</p>
+<h2 id="硬盘分区与格式化"><a class="markdownIt-Anchor" href="#硬盘分区与格式化"></a> 硬盘分区与格式化</h2>
+<p>进入openwrt界面的终端，输入命令<code>fdisk /dev/sda</code>管理该硬盘：</p>
+<ul>
+<li>输入<code>m</code>查看命令表</li>
+<li>输入<code>p</code>显示当前分区信息</li>
+<li>输入<code>d</code>删除分区</li>
+<li>输入<code>n</code>新建分区，后续会选择新建主分区或逻辑分区，输入<code>p</code>新建主分区即可。</li>
+<li>最后输入<code>w</code>保存退出。</li>
+</ul>
+<p>新建完成之后，进行格式化，命令为：<code>mkfs.ext4 /dev/sda1</code></p>
+<p>若无法进行格式化，先取消共享、挂载之后再尝试<code>umount /dev/sdb1 /mnt/sdb1</code></p>
+<p>我将其分了两个区，每个分区新建完之后都要进行格式化。然后会自动挂载，若没有自动挂载需要手动进行挂载。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210209161444.png" srcset="/img/loading.gif" alt="" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210209161531.png" srcset="/img/loading.gif" alt="" /></p>
+<p>至此就完成了openwrt的外接硬盘操作，后续要接用插件来实现网络存储功能。</p>
+<h2 id="使用可道云配置一个个人网盘"><a class="markdownIt-Anchor" href="#使用可道云配置一个个人网盘"></a> 使用可道云配置一个个人网盘</h2>
+<p>配置好硬盘之后使用可道云可以说是傻瓜操作，配置一下相关参数即可，监听端口等都可以不用改或者根据自己需求修改，主要就是设备路径需要保证已经顺利挂载，然后保存应用后点击<code>手动更新</code>，找到新版本后此按钮会变为<code>点击更新</code>，再次点击更新，过一会等他自动更新完成就可以访问了。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210209164252.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p>更新完之后<code>/mnt/sda1/kodexplorer/</code>目录就会自动创建。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210209164745.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210209165211.png" srcset="/img/loading.gif" alt="" /></p>
+<p>此后，访问openwrt的相应端口即可访问可道云，如我的是<code>192.168.1.50:8082</code>，相应的如果你拥有公网ip或者做了内网穿透的话，也可以在外地来访问家中的可道云，例如动态公网ip配合DDNS把自己的域名解析到家中，再路由器设置端口映射来实现外部访问。</p>
+<h2 id="使用网络共享配置一个家庭网络磁盘"><a class="markdownIt-Anchor" href="#使用网络共享配置一个家庭网络磁盘"></a> 使用网络共享配置一个家庭网络磁盘</h2>
+<p>配置好外接硬盘后，在网络共享处添加共享目录，软件名随意，目录设置为想要共享的目录，我填写了我的第二个分区，允许用户写空，后续设置按图即可。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210209165315.png" srcset="/img/loading.gif" alt="" /></p>
+<p>之后需要在编辑模板处在<code>invalid users = root</code>前加一个<code>#</code>将其注释掉，如图所示。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210209165542.png" srcset="/img/loading.gif" style="zoom: 67%;" />
+<p>点击保存应用，之后在PC端文件资源管理器中打开你的openwrt的ip地址，如<code>\\192.168.1.50</code>就会看到你之前配置的共享目录了，右键即可将其映射为网络驱动器。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210209165812.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210209165858.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<p>[教程] 软路由之openwrt挂载硬盘和开启共享https://koolshare.cn/thread-188012-1-1.html</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/16/%E5%A4%A7%E5%AD%A6%E5%9B%9B%E5%B9%B4%E6%80%BB%E7%BB%93%E2%80%94%E2%80%94%E6%88%91%E6%9C%89%E4%BD%95%E6%88%90%E6%9E%9C/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">大学四年总结——我做到了什么</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/30/%E4%B8%BA%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%90%AFHTTPS%E6%94%AF%E6%8C%81/">
+                        <span class="hidden-mobile">为你的博客开启HTTPS支持</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

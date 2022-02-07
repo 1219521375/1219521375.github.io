@@ -1,0 +1,573 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/headpic.jfif">
+  <link rel="icon" type="image/png" href="/image/headpic.jfif">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PokeStar">
+  <meta name="keywords" content="">
+  <title>略读一些VQA论文 - PokeStar&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.pokestar.wang","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"iBJ8IeKzxC1t8gL78pOhBgve-9Nh9j0Va","app_key":"ikqlgnddeJu2RBBeFTSuRAyx","server_url":"https://ibj8iekz.lc-cn-e1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>PokeStar的个人小站</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/image/bg/North-America-Nebula-Deepscape_Liron-Gertsman.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="略读一些VQA论文">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-12 10:42" pubdate>
+        2021年10月12日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      32
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">略读一些VQA论文</h1>
+            
+            <div class="markdown-body">
+              <h2 id="mcb2016紧凑双线性池化"><a class="markdownIt-Anchor" href="#mcb2016紧凑双线性池化"></a> MCB（2016）紧凑双线性池化</h2>
+<p>Multimodal Compact Bilinear Pooling for Visual Question Answering and Visual Grounding，使用<strong>紧凑的双线性池化</strong>来计算两个模态的特征向量。</p>
+<p>双线性池化模型在2000年被提出，然而，考虑到它们的高维数（n^2），双线性池化到目前为止还没有被广泛使用。 文章参考了【. Compact bilinear pooling. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition】这篇论文中 Gao 等人的想法，其展示了如何有效地压缩单一模态的双线性池化。</p>
+<p>VQA上，使用具有注意力和多个 MCB 的架构对两个 VQA 数据集上的表现进行了显著改进。 在视觉短语定位任务中，引入 MCB 池化可以提高短语定位精度，表明查询短语表示和提议边界框的视觉表示之间有更好的交互。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110121135474.png" srcset="/img/loading.gif" alt="" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110121651698.png" srcset="/img/loading.gif" alt="" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110121651660.png" srcset="/img/loading.gif" alt="" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110121156626.png" srcset="/img/loading.gif" alt="" /></p>
+<h2 id="mlb-2016-2017-低秩双线性池化"><a class="markdownIt-Anchor" href="#mlb-2016-2017-低秩双线性池化"></a> MLB (2016-2017) 低秩双线性池化</h2>
+<p>双线性表示往往是高维的，限制了计算复杂任务的适用性。 本文提出了：</p>
+<ol>
+<li>使用 <strong>Hadamard 乘积的低秩双线性池化</strong>，以实现多模态学习的有效注意机制。 我们表明，我们的模型在视觉问答任务中的表现优于紧凑双线性池，在 VQA 数据集上获得了最先进的结果。</li>
+<li>其次，针对vqa，提出了一种<strong>利用低秩双线性池的高效注意机制的多模态低秩双线性注意网络（MLB）</strong>,结合了soft attention，实现了一种新的最先进的性能，并且具有更好的节省性能，进行了消融研究，以探索替代选择，例如网络深度、非线性函数和快捷连接。</li>
+</ol>
+<p>紧凑的双线性池包含两个缺点。 一种来自<strong>抽样sample方法</strong>。 紧凑双线性池化依赖于一个有利的特性，E[hΨ(x, h, s), Ψ(y, h, s)i] = hx, yi，它为使用投影特征而不是原始特征提供了基础。 然而，计算精确期望在计算上是难以处理的，因此，随机参数 h 和 s 在训练和评估期间是固定的。 这个实际的选择导致了第二个缺点。 紧凑双线性池的投影维度应该足够大，以最小化固定参数的偏差。 对于 512 维和 4096 维输入，实际选择分别为 10K 和 16K。 尽管与完全双线性池化相比，这些压缩维度减少了两个数量级，但这种<strong>高维特征可能成为计算复杂模型的瓶颈</strong>。</p>
+<p>**解决方法：**使用 Hadamard 乘积（逐元素乘法）的低秩双线性池化。将用于双线性池化的三维权重张量分解为三个二维权重矩阵，从而强制权重张量的秩为低秩。 因此，分别由两个权重矩阵线性投影的两个输入特征向量通过 Hadamard 乘积计算，然后使用第三个权重矩阵进行线性投影。</p>
+<h2 id="mutan-2017"><a class="markdownIt-Anchor" href="#mutan-2017"></a> MUTAN （2017）</h2>
+<p>Multimodal Tucker Fusion for VQA，同样是对双线性池化的改进，改进方向同样是使其更适合计算复杂任务。</p>
+<p>文章认为，MLB的低秩张量结构相当于将视觉和问题表示投影到公共r维空间中，并在该空间中计算简单的元素级产品交互。因此，MLB本质上是为学习文本和图像模式的强大单模态嵌入而设计的，但依赖于该空间中的简单融合方案。</p>
+<p>为了解决这个问题，引入了 MUTAN，一种基于多模态张量的 Tucker 分解，以有效地参数化视觉和文本表示之间的双线性交互。 如下图，将q，v联合的向量 $\tau $ 分解为三个向量和一个 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>τ</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">\tau_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.1132em;">τ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.1132em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131049573.png" srcset="/img/loading.gif" alt="" /></p>
+<p>除了 Tucker 框架之外，我们还设计了一个基于低秩矩阵的分解来明确限制交互秩。 使用 MUTAN，我们控制合并方案的复杂性，同时保持良好的可解释融合关系。 我们展示了我们的 MUTAN 模型如何概括一些最新的 VQA 架构，提供最先进的结果。</p>
+<p>文中使用和MCB类似的attention方法</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131036531.png" srcset="/img/loading.gif" alt="" /></p>
+<h2 id="总结以上工作"><a class="markdownIt-Anchor" href="#总结以上工作"></a> 总结以上工作</h2>
+<p>想要使用双线性池化相关方法对image vec &amp; question vec 作联合得到一个联合向量，对这个联合向量进行分类器输入得到答案</p>
+<h2 id="mfb-2017-双线性池化co-attention"><a class="markdownIt-Anchor" href="#mfb-2017-双线性池化co-attention"></a> MFB (2017) 双线性池化+co-attention</h2>
+<p>由于MLB生成的输出特征具有较低的维度和较少的参数模型，因此它与MCB具有很强的竞争力。然而，<strong>MLB收敛速度慢，对学习的超参数敏感</strong>。</p>
+<p>为了解决这些问题，我们开发了**多模分解双线性池（MFB）**方法，用于融合图像的视觉特征和问题的文本特征，该方法具有MLB紧凑的输出特性和MCB强大的表达能力。</p>
+<p>其次，在MFB模块的基础上，设计了一个<strong>共同注意co-attention学习</strong>体系结构，实现了图像注意和问题注意的联合学习。MFB方法和共同注意模型在VQA数据集上实现了最先进的性能。我们还进行了详细和广泛的实验，以说明为什么我们的MFB方法是有效的。</p>
+<p>同时我们的实验结果表明，归一化技术在双线性模型中非常重要。</p>
+<h4 id="最简单的多模态双线性模型"><a class="markdownIt-Anchor" href="#最简单的多模态双线性模型"></a> 最简单的多模态双线性模型</h4>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131600745.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p>x是图片特征，y是文本特征。虽然双线性池化可以有效地捕捉特征维度之间的成对相互作用，但它也引入了大量的参数（投影矩阵W），可能会导致高计算成本和过拟合的风险。</p>
+<h4 id="将w变换为两个低秩矩阵可以重写为mfb形式"><a class="markdownIt-Anchor" href="#将w变换为两个低秩矩阵可以重写为mfb形式"></a> 将W变换为两个低秩矩阵，可以重写为MFB形式</h4>
+<p>MLB可以理解为MFB的特例（k=1），形象地说，MFB 可以分解为两个阶段：首先，将来自不同模态的特征扩展到高维空间，然后与元素乘法相结合。 之后，执行和归一化层后的和池化以将高维特征压缩到紧凑的输出特征中，而 MLB 直接将特征投影到低维输出空间并执行逐元素乘法。 因此，在输出特征维数相同的情况下，MFB 的表示能力比 MLB 更强大。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131603852.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131608898.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131207384.png" srcset="/img/loading.gif" alt="" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131207509.png" srcset="/img/loading.gif" alt="" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131701450.png" srcset="/img/loading.gif" alt="" /></p>
+<h2 id="mfh-2018-mfb的广义高阶设置"><a class="markdownIt-Anchor" href="#mfh-2018-mfb的广义高阶设置"></a> MFH (2018) MFB的广义高阶设置</h2>
+<ul>
+<li>设计了一种具有<strong>协同注意力</strong>学习的网络架构，同时对图像注意力和问题注意力进行建模，以便我们可以有效地减少不相关的特征，并为图像和问题表示提取更多的判别特征。</li>
+<li>开发了一种<strong>多模态因子化双线性池 (MFB) 方法</strong>以实现更有效地融合图像的视觉特征和问题的文本特征，并开发了一个称为 MFH 的广义高阶模型来捕获更复杂的交互 多模态特征。 与现有的双线性池化方法相比，我们提出的 MFB 和 MFH 方法可以显着提高 VQA 的性能，因为它们可以更有效地利用多模态特征之间的复杂相关性，它具有MLB紧凑的输出特性和MCB强大的表达能力。我们将双线性MFB模型扩展到一个广义的高阶设置，并提出了一种多模态分解高阶池（MFH）方法，通过充分利用多模态特征的复相关来实现更有效的多模态特征融合。通过在多模态特征之间引入更复杂的高阶交互，我们的MFH方法可以实现更具辨别力的图像问题表示，并进一步显著提高VQA性能。</li>
+<li>通过使用<strong>KL 散度作为损失函数</strong>，与最先进的策略相比，我们提出的答案预测方法可以实现更快的收敛速度并获得更好的性能。 我们的实验结果表明，我们的方法在两个大规模真实世界 VQA 数据集上实现了最先进的或可比的性能。我们将答案预测问题描述为一个标签分布学习问题。训练数据集中图像问题对的答案转换为所有可能答案的概率分布。我们使用KullbackLeibler散度（KLD）作为损失函数，以更准确地描述预测答案的概率分布与注释者给出的地面真相答案的概率分布之间的一致性。与MCB[8]中的答案抽样方法相比，使用KLD损失可以获得更快的收敛速度，并且在答案预测方面获得稍好的精度。</li>
+</ul>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131848877.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<h4 id="通过级联多个mfb块来将二阶双线性池扩展到广义高阶池一种广义的多模态分解高阶池mfh模型"><a class="markdownIt-Anchor" href="#通过级联多个mfb块来将二阶双线性池扩展到广义高阶池一种广义的多模态分解高阶池mfh模型"></a> 通过级联多个MFB块来将二阶双线性池扩展到广义高阶池，一种广义的多模态分解高阶池（MFH）模型</h4>
+<p>MFB可以分为膨胀和紧缩阶段。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131936218.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p>稍加修改使其适合及联。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131939742.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131941679.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p>(5)式修改为（7）式，结果在（6）式中输出为当前第i个block的输出，由（8）式对所有block的输出进行及联。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110131949823.png" srcset="/img/loading.gif" alt="" /></p>
+<h4 id="kl散度损失函数"><a class="markdownIt-Anchor" href="#kl散度损失函数"></a> KL散度损失函数</h4>
+<p>在<strong>大多数现有的VQA方法</strong>中，应答阶段被描述为一个多类分类问题，每个应答涉及一个单独的类。在实践中，这种假设可能不适用于VQA任务，因为具有相同或相似含义的答案可以由不同的注释者进行不同的表达。例如，对于给定的图像问题对，“dog”和“puppy”的答案可能都是正确的。因此，在VQA任务中对答案相关性进行建模是至关重要的，这样学习到的模型才能更稳健。在一些数据集中，如VQA，每个问题都由不同的人用多个答案进行注释。为了利用答案相关性，MCB采用了答案抽样策略。具体而言，对于训练集中的每个图像问题对，每个样本的多个答案表示为所有可能答案y的分布N维向量，其中N是整个训练集的答案总数，每一个元素的大小为0-1，是对应为答案的概率。这样，问题就变成了传统的单标签多类分类问题，传统的softmax损失函数可以用来训练模型。通过足够的迭代次数，模型最终可以学习答案相关性</p>
+<p>在<strong>实践中</strong>，使用答案抽样策略可能会给学习的模型带来不确定性，并且可能需要更多的迭代才能收敛。 为了克服这个问题，我们将带有样本答案的单标签多类分类问题转换为带有答案分布 y 的标签分布学习 (LDL) 问题 [37]。 因此，在最后一个全连接层的 softmax 激活之后，我们使用 KLdivergence 损失函数来惩罚预测 z ∈ RN。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110132014996.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<h2 id="ban-bilinear-attention-networks-低秩双线性池化的基础上使用双线性注意分布"><a class="markdownIt-Anchor" href="#ban-bilinear-attention-networks-低秩双线性池化的基础上使用双线性注意分布"></a> BAN Bilinear Attention Networks 低秩双线性池化的基础上使用双线性注意分布</h2>
+<p>BAN利用双线性注意映射优雅地扩展了单一注意网络，其中<strong>使用低秩双线性池提取多模态多通道输入的联合表示</strong>。尽管BAN考虑每对多模输入通道，但计算成本保持不变，因为BAN由矩阵链乘法组成，以实现高效计算。此外，我们提出了一种**多模态剩余网络（MRN）**的变体，以有效地利用BAN的多个双线性注意图，由于提出的BAN残差学习方法利用残差求和而不是级联，因此可以有效地学习多达8个BAN的参数和性能。关于两个一瞥禁令的概述，保持了中间特征的大小不变。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110132238626.png" srcset="/img/loading.gif" alt="" /></p>
+<p>注意力分数由低秩双线性池化确定：<img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110132253460.png" srcset="/img/loading.gif" style="zoom:67%;" /></p>
+<p>Attention map 确定方式：<img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110132353931.png" srcset="/img/loading.gif" style="zoom:67%;" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110132342976.png" srcset="/img/loading.gif" alt="" /></p>
+<p>经过 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>=</mo><msup><mi>P</mi><mi>T</mi></msup><msup><mi>f</mi><msup><mrow></mrow><mo mathvariant="normal">′</mo></msup></msup></mrow><annotation encoding="application/x-tex">f = P^Tf^{&#x27;}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.13692em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.94248em;"><span style="top:-2.94248em;margin-right:0.05em;"><span class="pstrut" style="height:2.57948em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8278285714285715em;"><span style="top:-2.931em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span> 得到最终BAN函数 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>=</mo><mi>B</mi><mi>A</mi><mi>N</mi><mo stretchy="false">(</mo><mi>X</mi><mo separator="true">,</mo><mi>Y</mi><mo separator="true">;</mo><mi>A</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f = BAN(X,Y;A)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord mathdefault">A</span><span class="mord mathdefault" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">A</span><span class="mclose">)</span></span></span></span> 。</p>
+<p>其对应的残差连接：<img src="https://gitee.com/pokestar/image-bed/raw/master/2021/202110132354446.png" srcset="/img/loading.gif" style="zoom:67%;" /></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/">论文阅读</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/deeplearning/">deeplearning</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/10/14/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-VILBERT/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">论文阅读笔记-VILBERT</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/08/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-MCAN/">
+                        <span class="hidden-mobile">论文阅读笔记-MCAN</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

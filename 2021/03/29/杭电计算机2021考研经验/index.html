@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/headpic.jfif">
+  <link rel="icon" type="image/png" href="/image/headpic.jfif">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PokeStar">
+  <meta name="keywords" content="">
+  <title>杭电计算机2021考研经验 - PokeStar&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.pokestar.wang","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"iBJ8IeKzxC1t8gL78pOhBgve-9Nh9j0Va","app_key":"ikqlgnddeJu2RBBeFTSuRAyx","server_url":"https://ibj8iekz.lc-cn-e1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>PokeStar的个人小站</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/image/bg/North-America-Nebula-Deepscape_Liron-Gertsman.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="杭电计算机2021考研经验">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-29 08:13" pubdate>
+        2021年3月29日 早上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">杭电计算机2021考研经验</h1>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>记录一下这一年备考的经历与经验，算是给上岸的自己一个交待，也给后来者一些建议。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210330110722.jpg" srcset="/img/loading.gif" style="zoom:67%;" />
+<h2 id="考研之前-择校"><a class="markdownIt-Anchor" href="#考研之前-择校"></a> 考研之前 · 择校</h2>
+<p>考研择校是考研非常重要的一环，能否上岸很大程度上取决于你报考的学校。归根结底，你需要选择适合自己的学校。</p>
+<ul>
+<li>
+<p><strong>未来发展规划</strong></p>
+<p>我认为首先需要考虑的就是你的未来规划，你毕业后想去哪个城市发展，想进公司还是想进体制内找个稳定工作。如果想进公司的，优先考虑地域好，计算机实力强的院校，比如杭电、深大、西电、北邮这类的学校，就业比较好；如果想进体制的，那么考个211以上的学校会比较好。</p>
+</li>
+<li>
+<p><strong>了解意向院校的信息</strong></p>
+<p>有了大致的范围之后就要去了解意向院校的招生信息，这个时候不仅要了解<strong>分数线</strong>，所考<strong>专业课</strong>也非常重要。例如杭电的11408（数一英一408），基本算是计算机院校中比较难的专业课了（当然今年的408偏简单），而且问题在于复习周期长，数一三本书，408四本书，茫茫多的知识点需要你复习，所以如果你只有半年备考时间就不要选择这类学校了，除非你本科408和数学都学得很好且没有忘记。有些学校分数线很高，但其实专业课简单，有些学校分数线较低，但是专业课很难甚至压分，也需要自己进行一个判断。对于计算机科班学生来讲，我个人比较推荐11408或者22408的学校，因为专业课较多，容易发挥自身科班的优势。同时今年的形势来看，改考408的学校会越来越多，调剂上会比较方便。</p>
+<p>其次，<strong>招生计划人数</strong>也很重要，招生多的学校分数线会相对稳定，就算有涨跌也是跟着当年考试难度变化，而招生人数极少的学校就要看运气了，有可能可以捡漏，也有可能是暴雷。举个例子吧，杭电今年不乏400+大佬，但是总的招生人数较多，所以分数线还是在300左右，总的来讲没有变化太明显。</p>
+</li>
+</ul>
+<h2 id="全力备考-复习"><a class="markdownIt-Anchor" href="#全力备考-复习"></a> 全力备考 · 复习</h2>
+<p>选完学校就是根据该校的报考科目进行复习，这里分享一下自己11408的复习情况。</p>
+<h4 id="数学一"><a class="markdownIt-Anchor" href="#数学一"></a> 数学一</h4>
+<p>数学名师很多，选一个喜欢的跟就行，个人跟的是张宇，主要还是因为他的书比较好看2333，以及他的书有整理比较好的思维导图，我用Margin note配合他的导图整理了数学思维导图、公式图，用来记忆非常有效果，个人感觉数学背诵一些公式还是很有必要的。顺便线代还是万年不变李永乐，没有对比过宇哥和李永乐线代的区别，但是李永乐的线代听起来是真的舒服又有用。另外需要提醒的是<strong>数学千万不要光顾着听课不做题</strong>，我前期就是只听了课忽略了做题，听完一讲做一讲的题还是很有必要的，前期做题的比例至少要占数学时间的一半，后期听完了提高班之后自然是一直做题刷题。我是三四月份开始复习听网课，9月听完强化班，做题上做了30讲、36讲的课后题加上一千题的ab组，然后刷了05-20的真题。</p>
+<h4 id="英语一"><a class="markdownIt-Anchor" href="#英语一"></a> 英语一</h4>
+<p>英语方面我比较特殊，我几乎没有进行像样的英语复习。英语单词只在暑假背了恋恋有词核心篇，截止到考试也只做了大概五六套的英语真题。但是作文上我根据公众号整理的刘晓燕的作文课笔记认真整理了几篇自己的模板，整理了各处都有啥句子可以用，总体来讲在英语上面花点时间很少了。</p>
+<p>不过我这样做是有前提的，首先我报考的院校对英语没有什么要求，而像34所这些大多会划英语单科线，然后有些院校复试时会考英语或者全英文问答，这些院校则英语需要多加功夫；其次我暑假没开始复习英语前先尝试做了一份英语真题，发现阅读完型正确率在50-60左右，那么到时候我应该也能考到50、60的样子，我觉得这个分数已经足够了，所以我就把心思全花在了数学和专业课上，事实证明我的选择是正确的。</p>
+<p>所以这里我想说，英语复习还是要按照自己的基础来，我的四级分数546，六级471，再加上做了真题感觉已经到了我的目标院校要求了，所以就没花啥心思。这里真是想批一下培训机构，暑假我去一个机构问了下课程，不过最后没有报，留了电话。后面那个人就一直打电话过来问我复习情况，然后和我说英语还是需要多复习之类的，事实证明就是想吸引我买课罢了。但是也有不少人因为总分挺高最后英语不过线的，还是要根据<strong>自己的基础</strong>以及<strong>目标院校的要求</strong>来。</p>
+<h4 id="政治"><a class="markdownIt-Anchor" href="#政治"></a> 政治</h4>
+<p>政治没啥好说的，今年是肖秀荣大杀四方的一年，我们都是肖老答案的搬运工。这门课真的是不需要太早复习，极限情况下考前一两星期背下肖四就完了，今年的政治大题全是肖四里的。正经复习建议的话，11月份之前就听听徐涛的课，不建议拿整段时间听，中午晚上休息时间听几节就行，主要是对知识点有个印象，然后做肖秀荣一千题里的选择部分，刷完就行。学有余力的可以买一本背书的小册子，比如徐涛冲刺背诵笔记之类的背一点。接下来重点来了，肖八肖四重点复习，一定要做完，特别是肖四的大题要全部背下来，政治的大题靠肖四那些东西够用了。</p>
+<p>最后还是要提醒一句，根据自己情况来，如果你报考的院校专业课很简单拉不开分差，那么应该在英语政治上花多点功夫。</p>
+<h4 id="专业课408"><a class="markdownIt-Anchor" href="#专业课408"></a> 专业课408</h4>
+<p>说实话，今年408真的简单，并且考在我会的点上，也算是运气好了。408的复习建议早点开始，王道的四本书、课后题配合王道的课程，反复刷反复复习，408知识点多，想考的深也可以很深，真题也可以多刷几轮，个人理解408就是需要记忆很多知识点。第一轮复习可以先不做大题，第二轮就要做大题了。同样建议自己整理或者购买王道的思维导图或者网上寻找其他人整理的思维导图配合进行复习。</p>
+<h2 id="初试之后-规划"><a class="markdownIt-Anchor" href="#初试之后-规划"></a> 初试之后 · 规划</h2>
+<p>初试之后我相信大部分人会不太适应，自身在考研期间养成的一套规律而高效的作息一下子没了动力持续，接下来除了玩不知道该干嘛。我的建议是有条件的可以去找一份实习做做，不用纠结什么岗位，早点接触下社会，同时锻炼、保持下自己的代码能力。最后复试时也能写一段经历。而且从我个人体会来看，一年的复习会让你的代码能力生疏不少，所以还是要进行一些练习，万一考不上，找工作方便，考上了，那就辞了实习专心复试。</p>
+<h2 id="黎明之前-复试"><a class="markdownIt-Anchor" href="#黎明之前-复试"></a> 黎明之前 · 复试</h2>
+<p>复试主要针对杭电，杭电的复试还是比较公平的，21年的是线上复试，没有机试环节，总共大概是三个环节，第一个是中英文自我介绍，总共三分钟，然后会根据你的自我介绍、简历提一些问题，然后是抽题环节，都是事先出好的题，总共三个，英语题（英语口语回答），程序阅读题（代码填空），专业题（数据结构、机组、操作系统三本书范围内出一个小问题，个人感觉机组操作系统会比较多），最后一个环节是自由提问，一般是提问除以上三门以外的计算机专业课，计算机网络，软件工程，数据库，编译原理这些。</p>
+<p>杭电复试之前不需要提前联系导师，会先有一些实验室进行提前面试，等复试完之后会下发导师学生双选表，一般会在实验室里面选导师。没有进实验室也不用急，过了复试就一定会有老师收的，后面会进行分配。</p>
+<h2 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h2>
+<p>考研的这一年确实比较累，但也是累的很充实，更重要的是让我养成了学习的习惯和静下心来学习的能力。希望能够在研究生学习中继续保持，也预祝看到这里的你能够顺利上岸。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%9D%82%E6%96%87/">杂文</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/">个人成长</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/30/202103%E6%9C%88%E6%80%BB%E7%BB%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">202103月总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/16/%E6%88%91%E7%9A%84%E7%9B%AE%E6%A0%87/">
+                        <span class="hidden-mobile">我的目标</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

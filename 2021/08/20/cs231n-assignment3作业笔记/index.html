@@ -1,0 +1,609 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/headpic.jfif">
+  <link rel="icon" type="image/png" href="/image/headpic.jfif">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PokeStar">
+  <meta name="keywords" content="">
+  <title>cs231n-assignment3作业笔记 - PokeStar&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.pokestar.wang","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"iBJ8IeKzxC1t8gL78pOhBgve-9Nh9j0Va","app_key":"ikqlgnddeJu2RBBeFTSuRAyx","server_url":"https://ibj8iekz.lc-cn-e1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>PokeStar的个人小站</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/image/bg/North-America-Nebula-Deepscape_Liron-Gertsman.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="cs231n-assignment3作业笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-20 21:15" pubdate>
+        2021年8月20日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">cs231n-assignment3作业笔记</h1>
+            
+            <div class="markdown-body">
+              <h1 id="cs231n-assignment3"><a class="markdownIt-Anchor" href="#cs231n-assignment3"></a> CS231n-assignment3</h1>
+<p>作业3的内容主要有：RNN循环神经网络，LSTM长短时记忆神经网络，NetworkVisualization使用图像梯度生成图像，Style Transfer风格迁移，GAN生成式对抗网络。具体代码已经上传<a target="_blank" rel="noopener" href="https://github.com/1219521375/CS231n2020">github</a>。</p>
+<h2 id="rnn"><a class="markdownIt-Anchor" href="#rnn"></a> RNN</h2>
+<p>实现一个普通的循环神经网络，并使用它来训练一个可以为图像生成新标题的模型。RNN对具有序列特性的数据非常有效，它能挖掘数据中的时序信息以及语义信息，特别适合语音识别、语言模型、机器翻译以及时序分析等NLP领域的问题。</p>
+<p>RNN的这一特性来源于其特殊的结构，RNN的隐含层之间的节点是由连接的，隐含层的输入不仅包括输入层的输出还包括上一时刻隐藏层的输出。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210821104604.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210821105037.png" srcset="/img/loading.gif" alt="" /></p>
+<p>RNN简单结构和公式如上图所示，注意<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mtext>tanh</mtext><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{tanh}(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">tanh</span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>的导数为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mtext>tanh</mtext><mn>2</mn></msup><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(1 - \text{tanh}^2(x))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.148448em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord text"><span class="mord">tanh</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8984479999999999em;"><span style="top:-3.1473400000000002em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>，根据以上公式编写代码，部分重点代码如下。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># rnn_step_forward</span><br>h = x.dot(Wx) + prev_h.dot(Wh) + b<br>next_h = (np.exp(h) - np.exp(-h)) / (np.exp(h) + np.exp(-h))<br>cache = (next_h, Wx, Wh, x, prev_h)<br><br><span class="hljs-comment"># rnn_step_backward</span><br>dh = (<span class="hljs-number">1</span> - next_h ** <span class="hljs-number">2</span>) * dnext_h<br>dx = dh.dot(Wx.T)<br>dWx = x.T.dot(dh)<br>dprev_h = dh.dot(Wh.T)<br>dWh = prev_h.T.dot(dh)<br>db = np.<span class="hljs-built_in">sum</span>(dh, axis=<span class="hljs-number">0</span>)<br><br><span class="hljs-comment"># rnn_forward</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(T - <span class="hljs-number">1</span>):<br>	next_h, next_cache = rnn_step_forward(x[:, i + <span class="hljs-number">1</span>, :], next_h, Wx, Wh, b)<br>	h[:, i + <span class="hljs-number">1</span>, :] = next_h<br><br><span class="hljs-comment"># rnn_backward</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(T - <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>):<br>        dnext_h = dprev_h + dh[:, i, :]<br>        dxt, dprev_h, dWxt, dWht, dbt = rnn_step_backward(dnext_h, cache[i])<br>        dx[:, i, :] = dxt<br>        dWx += dWxt<br>        dWh += dWht<br>        db += dbt<br>    dh0 = dprev_h<br></code></pre></td></tr></table></figure>
+<h3 id="word-embedding"><a class="markdownIt-Anchor" href="#word-embedding"></a> Word Embedding</h3>
+<p>词嵌入层的主要作用是将单词表（大小为V）映射到一个D维向量。</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sas"># forward<br><span class="hljs-meta">out</span> = W[<span class="hljs-meta">x</span>]  # <span class="hljs-meta">x</span>的每一位置填充w[<span class="hljs-meta">x</span>[i][j]]<br><br># brackward<br>dW = np.zeros((V, D))<br>np.<span class="hljs-meta">add</span>.at(dW, <span class="hljs-meta">x</span>, dout) # 在dw的下标为<span class="hljs-meta">x</span>的位置加上dout<br></code></pre></td></tr></table></figure>
+<h2 id="lstm"><a class="markdownIt-Anchor" href="#lstm"></a> LSTM</h2>
+<p>具体任务与上一节相同，只是使用LSTM代替RNN来实现。由于重复矩阵乘法引起的梯度消失和爆炸，普通RNN很难在长序列上训练。LSTMs通过用如下的选通机制替换RNN的简单更新规则来解决这个问题。</p>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210822110450610.png" srcset="/img/loading.gif" alt="image-20210822110450610" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822110604.png" srcset="/img/loading.gif" alt="" /></p>
+<p>LSTM的公式与结构如上所示，实现方法也与RNN类似，根据公式构建单步的前向传播，再逐公式求导，根据链式法则编写单步反向传播的代码，最后使用for循环将多个单步运行链接即可。</p>
+<h2 id="networkvisualization"><a class="markdownIt-Anchor" href="#networkvisualization"></a> NetworkVisualization</h2>
+<p>先使用一个CNN模型进行训练，将反向传播得到的图片梯度进行可视化，可以了解到网络对图片不同地方的关注度，加深CNN对图片特征提取的理解。</p>
+<p>在model计算得到所有scores后，使用gather函数找到label对应正确分类的分数，进行反向传播找到梯度变化最大的channe进行显示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">scores = model(X)  <span class="hljs-comment"># N,C   y每一个数在0-C</span><br>correct_scores = scores.gather(<span class="hljs-number">1</span>, y.view(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)).squeeze()<br>correct_scores.backward(torch.ones_like(y))  <span class="hljs-comment"># Tensor 对tensor求导</span><br>dx = X.grad<br>abs_dx = np.absolute(dx)  <span class="hljs-comment"># (N, 3, H, W) 绝对化下降或上升幅度</span><br>saliency, _ = torch.<span class="hljs-built_in">max</span>(abs_dx, dim=<span class="hljs-number">1</span>)  <span class="hljs-comment">#</span><br></code></pre></td></tr></table></figure>
+<p>同时，作业中还将使用图像梯度来愚弄模型。具体做法是使用一个样本对应一个错误的类别，模型计算得到分数后用这个错误类别对应的得分来进行反向传播，并将梯度加到图像样本上，不断循环，当修改后的样本能够分类到这个错误类别后停止。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">100</span>):<br>    scores = model(X_fooling)  <span class="hljs-comment"># N,C</span><br>    <span class="hljs-keyword">if</span> torch.argmax(scores) == target_y:<br>        print(<span class="hljs-string">&#x27;迭代次数: %i&#x27;</span> % i)<br>        <span class="hljs-keyword">break</span><br>    <span class="hljs-keyword">else</span>:<br>        target_score = scores[:, target_y]<br>        target_score.backward()<br>        target_grad = X_fooling.grad<br>        dx = learning_rate * target_grad / torch.norm(target_grad)<br>        <span class="hljs-keyword">with</span> torch.no_grad():<br>            X_fooling += dx<br>        X_fooling.grad.zero_()<br></code></pre></td></tr></table></figure>
+<p>紧接着上一步，可以使用一个随机噪声图像进行梯度上升，来构造一个让网络可以识别为给定目标类的随机噪声图像。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822114456.png" srcset="/img/loading.gif" alt="" /></p>
+<p>把图片当做变量，固定模型中的权重，来优化上面的目标函数，其中 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>y</mi><mo stretchy="false">(</mo><mi>I</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">sy(I)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">s</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mclose">)</span></span></span></span>是给定类标签 y 时模型的评分。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">scores = model(img)  <span class="hljs-comment"># N,C</span><br>target_score = scores[:, target_y]<br>target_score.backward()<br>dx = img.grad + <span class="hljs-number">2</span> * l2_reg * img<br><span class="hljs-keyword">with</span> torch.no_grad():<br>    img += learning_rate * dx / torch.norm(dx)<br>model.zero_grad()<br></code></pre></td></tr></table></figure>
+<h2 id="style-transfer"><a class="markdownIt-Anchor" href="#style-transfer"></a> Style Transfer</h2>
+<p>输入两张图片，一张是风格图（比如一些著名画作），一张是内容图（比如摄影图），输出一张带有风格的内容图。</p>
+<p>具体方法同样也是使用梯度回传。使用不同的loss来评判风格style和内容content的偏差，然后让一张随机的噪声图像或者content图的这两个loss尽可能小，就得到了一个style也不是完全和原图一样，content也不是完全和原图一样的结果。</p>
+<p>首先根据公式编写content_loss的代码。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822131852.png" srcset="/img/loading.gif" alt="" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">return</span> content_weight * torch.<span class="hljs-built_in">sum</span>(torch.<span class="hljs-built_in">pow</span>((content_current - content_original), <span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
+<p>之后完成style_loss。这里需要计算<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yifanrensheng/p/12862174.html">Gram矩阵</a>，Gram矩阵是协方差矩阵的近似值——它告诉我们每个通道的值（即过滤器的激活）如何与其他通道的值相关联。G是内容图片的gram矩阵，A是风格图片的gram矩阵。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822132927.png" srcset="/img/loading.gif" alt="" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822132935.png" srcset="/img/loading.gif" alt="" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822132944.png" srcset="/img/loading.gif" alt="" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># gram_matrix</span><br>N, C, H, W = features.shape<br>features = features.view(N * C, H * W)<br>Gram = torch.mm(features, features.T) <span class="hljs-comment"># 矩阵相乘 NC,NC</span><br><span class="hljs-keyword">if</span> normalize:<br>    Gram = Gram.div(C * H * W) <br><span class="hljs-keyword">return</span> Gram.view((N, C, C))<br><br><span class="hljs-comment"># style_loss</span><br><span class="hljs-comment"># style_targets为已经计算好的style img</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(style_layers)):<br>	G = gram_matrix(feats[style_layers[i]])<br>	loss += style_weights[i] * torch.<span class="hljs-built_in">sum</span>(torch.<span class="hljs-built_in">pow</span>((G - style_targets[i]), <span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822135457.png" srcset="/img/loading.gif" alt="" /></p>
+<p>最后计算tv_loss，对3个输入通道（RGB）中的每个通道的总变化调节进行求和，并用权重进行加权。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">a = torch.<span class="hljs-built_in">sum</span>(torch.<span class="hljs-built_in">pow</span>(img[:, :, :-<span class="hljs-number">1</span>, :] - img[:, :, <span class="hljs-number">1</span>:, :], <span class="hljs-number">2</span>))<br>b = torch.<span class="hljs-built_in">sum</span>(torch.<span class="hljs-built_in">pow</span>(img[:, :, :, :-<span class="hljs-number">1</span>] - img[:, :, :, <span class="hljs-number">1</span>:], <span class="hljs-number">2</span>))<br><span class="hljs-keyword">return</span> tv_weight * (a + b)<br></code></pre></td></tr></table></figure>
+<h2 id="gan"><a class="markdownIt-Anchor" href="#gan"></a> GAN</h2>
+<p>生成式对抗网络中有两个不同的神经网络，第一个网络是传统的分类网络，称为<strong>鉴别器discriminator</strong>。我们将训练鉴别器拍摄图像，并将它们分类为真实（属于训练集）或虚假（不存在于训练集中）。我们的另一个网络，称为<strong>生成器generator</strong>，将随机噪声作为输入，并使用神经网络对其进行变换以生成图像。生成器的目标是欺骗鉴别器，使其认为生成的图像是真实的。</p>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210822173810442.png" srcset="/img/loading.gif" alt="image-20210822173810442" /></p>
+<p>其中<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>z</mi><mo>∼</mo><mi>p</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">z ∼ p ( z )</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">p</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span>代表随机噪声样本，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>∼</mo><msub><mi>p</mi><mrow><mi>d</mi><mi>a</mi><mi>t</mi><mi>a</mi></mrow></msub></mrow><annotation encoding="application/x-tex">x ∼ p_{data}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∼</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathdefault">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight">a</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>代表的是训练数据，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">G(z)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span></span></span></span>代表用生成器G生成的图像，D就代表判别器的输出，可以认为是输入图像是real的概率，那相应的<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>就是把训练图像判别为real的概率，而<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D(G(z))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>就是把生成器生成的图像判别为real的概率。<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="double-struck">E</mi></mrow><annotation encoding="application/x-tex">\mathbb{E}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">E</span></span></span></span></span>是期望的意思。</p>
+<p>为了优化这个极小极大博弈，我们将在<img src="https://render.githubusercontent.com/render/math?math=G&amp;mode=inline" srcset="/img/loading.gif" alt="" />的目标上采取梯度<em>下降</em>步数，在<img src="https://render.githubusercontent.com/render/math?math=D&amp;mode=inline" srcset="/img/loading.gif" alt="" />的目标上采取梯度<em>上升</em>步数：<br />
+1.更新<strong>生成器</strong>（G），以最大限度地降低鉴别器做出正确选择的概率。让鉴别器猜错<br />
+2.更新<strong>鉴别器</strong>（D），以最大化uu鉴别器做出正确选择的概率。让鉴别器猜对</p>
+<p>实践中，我们使用一个不同的目标</p>
+<ol>
+<li>更新生成器（G），使鉴别器D对生成的数据做出错误选择的概率最大化：</li>
+</ol>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210822174120324.png" srcset="/img/loading.gif" alt="image-20210822174120324" /></p>
+<ol start="2">
+<li>更新鉴别器（D），使鉴别器D对真实数据和生成的数据做出正确选择的概率最大化：</li>
+</ol>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822174224.png" srcset="/img/loading.gif" alt="" /></p>
+<h3 id="vanilla-gan"><a class="markdownIt-Anchor" href="#vanilla-gan"></a> Vanilla GAN</h3>
+<p>首先是产生[-1,1]之间的噪声，利用torch.rand可以完成。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">return</span> torch.rand(batch_size, dim) * <span class="hljs-number">2</span> - <span class="hljs-number">1</span>  <span class="hljs-comment"># -1~1</span><br></code></pre></td></tr></table></figure>
+<p>接下来是建立判别器D，结构如下：</p>
+<ul>
+<li>Fully connected layer with input size 784 and output size 256</li>
+<li>LeakyReLU with alpha 0.01</li>
+<li>Fully connected layer with input_size 256 and output size 256</li>
+<li>LeakyReLU with alpha 0.01</li>
+<li>Fully connected layer with input size 256 and output size 1</li>
+</ul>
+<p>接着是生成器G：</p>
+<ul>
+<li>Fully connected layer from noise_dim to 1024</li>
+<li><code>ReLU</code></li>
+<li>Fully connected layer with size 1024</li>
+<li><code>ReLU</code></li>
+<li>Fully connected layer with size 784</li>
+<li><code>TanH</code> (to clip the image to be in the range of [-1,1])</li>
+</ul>
+<p>使用torch.nn.Sequential()建立即可。</p>
+<p>接下来是GAN的loss函数，generator loss与discriminator loss的公式分别如下：</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822185507.png" srcset="/img/loading.gif" alt="" /></p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822185514.png" srcset="/img/loading.gif" alt="" /></p>
+<p>之前的式子我们需要将其最大化，而损失函数的目标是最小化，所以添加负号方便计算。针对G，上式<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mi>G</mi></msub></mrow><annotation encoding="application/x-tex">L_G</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">G</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>目标即为使<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D(G(z))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>越大接近1，针对D，上式<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>L</mi><mi>D</mi></msub></mrow><annotation encoding="application/x-tex">L_D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">D</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>的目标是让<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>增大，让<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mo stretchy="false">(</mo><mi>G</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D(G(z))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathdefault">G</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="mclose">)</span><span class="mclose">)</span></span></span></span>减小接近0。</p>
+<p>使用<strong>二分类交叉熵损失函数</strong>(binary cross entropy loss)的形式，给定一个分值s和真实标签y，其公式为：</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822191615.png" srcset="/img/loading.gif" alt="" /></p>
+<p>一般s都是经过sigmoid或softmax将分数转化为的概率，这里使用sigmoid，将其化简：</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822191836.png" srcset="/img/loading.gif" alt="" /></p>
+<p>最后将上面红色和蓝色合并写成一个公式就是(仔细看下面的公式，当x为正时，就是上面的红色公式；当x为负时，就是上面的蓝色公式，总之就是使e的指数为负值)。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822192907.png" srcset="/img/loading.gif" alt="" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># discriminator_loss</span><br>true_labels = torch.ones(logits_real.shape[<span class="hljs-number">0</span>]).<span class="hljs-built_in">type</span>(dtype)<span class="hljs-comment"># </span><br>loss = bce_loss(logits_real, true_labels) + bce_loss(logits_fake, true_labels - <span class="hljs-number">1</span><br><br><span class="hljs-comment"># generator_loss</span><br>true_labels = torch.ones(logits_fake.shape[<span class="hljs-number">0</span>]).<span class="hljs-built_in">type</span>(dtype)<br>loss = bce_loss(logits_fake, true_labels)<br></code></pre></td></tr></table></figure>
+<p>接着定义模型的优化器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">optimizer = optim.Adam(model.parameters(), betas=(<span class="hljs-number">0.5</span>, <span class="hljs-number">0.999</span>), lr=<span class="hljs-number">1e-3</span>)<br></code></pre></td></tr></table></figure>
+<h3 id="ls-gan"><a class="markdownIt-Anchor" href="#ls-gan"></a> LS-GAN</h3>
+<p>LS-GAN是Least Squares GAN的简称，主要将GAN的生成器和判别器的损失函数都改了一下，可以更加稳定，生成器损失(generator loss)和判别器损失(discriminator loss)的公式分别为：</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822195008.png" srcset="/img/loading.gif" alt="" /></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-comment"># ls_discriminator_loss                                                   </span><br><span class="hljs-attribute">loss</span> = torch.mean(torch.pow(scores_real -<span class="hljs-number">1</span>, <span class="hljs-number">2</span>))/<span class="hljs-number">2</span> + torch.mean(torch.pow(scores_fake, <span class="hljs-number">2</span>))/<span class="hljs-number">2</span><br><br><span class="hljs-comment"># ls_generator_loss</span><br><span class="hljs-attribute">loss</span> = torch.mean(torch.pow(scores_fake - <span class="hljs-number">1</span>, <span class="hljs-number">2</span>))/<span class="hljs-number">2</span><br></code></pre></td></tr></table></figure>
+<h3 id="dc-gan"><a class="markdownIt-Anchor" href="#dc-gan"></a> DC-GAN</h3>
+<p>DC-GAN是Deeply Convolutional GANs的简称，原初来自于Ian Goodfellow的GAN里面网络结构都是线性层，没有卷积，而我们应用DCGAN的想法，就是构造模型时使用卷积神经网络和BatchNorm操作，会使得生成的图像更逼真。根据作业给出的结构编写模型代码。</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs vim"># build_dc_classifier<br><span class="hljs-keyword">return</span> <span class="hljs-keyword">nn</span>.Sequential(<br>        Unflatten(batch_size, <span class="hljs-number">1</span>, <span class="hljs-number">28</span>, <span class="hljs-number">28</span>),<br>        <span class="hljs-keyword">nn</span>.Conv2d(<span class="hljs-number">1</span>, <span class="hljs-number">32</span>, <span class="hljs-number">5</span>, stride=<span class="hljs-number">1</span>),<br>        <span class="hljs-keyword">nn</span>.LeakyReLU(),<br>        <span class="hljs-keyword">nn</span>.MaxPool2d(<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>),<br>        <span class="hljs-keyword">nn</span>.Conv2d(<span class="hljs-number">32</span>, <span class="hljs-number">64</span>, <span class="hljs-number">5</span>, stride=<span class="hljs-number">1</span>),<br>        <span class="hljs-keyword">nn</span>.LeakyReLU(),<br>        <span class="hljs-keyword">nn</span>.MaxPool2d(<span class="hljs-number">2</span>, stride=<span class="hljs-number">2</span>),<br>        <span class="hljs-keyword">nn</span>.Flatten(),<br>        <span class="hljs-keyword">nn</span>.Linear(<span class="hljs-number">4</span> * <span class="hljs-number">4</span> * <span class="hljs-number">64</span>, <span class="hljs-number">4</span> * <span class="hljs-number">4</span> * <span class="hljs-number">64</span>),<br>        <span class="hljs-keyword">nn</span>.LeakyReLU(),<br>        <span class="hljs-keyword">nn</span>.Linear(<span class="hljs-number">4</span> * <span class="hljs-number">4</span> * <span class="hljs-number">64</span>, <span class="hljs-number">1</span>)<br>    )<br><br># build_dc_generator<br><span class="hljs-keyword">return</span> <span class="hljs-keyword">nn</span>.Sequential(<br>        <span class="hljs-keyword">nn</span>.Linear(noise_dim, <span class="hljs-number">1024</span>),<br>        <span class="hljs-keyword">nn</span>.ReLU(),<br>        <span class="hljs-keyword">nn</span>.BatchNorm1d(<span class="hljs-number">1024</span>),<br>        <span class="hljs-keyword">nn</span>.Linear(<span class="hljs-number">1024</span>, <span class="hljs-number">7</span> * <span class="hljs-number">7</span> * <span class="hljs-number">128</span>),<br>        <span class="hljs-keyword">nn</span>.ReLU(),<br>        <span class="hljs-keyword">nn</span>.BatchNorm1d(<span class="hljs-number">7</span> * <span class="hljs-number">7</span> * <span class="hljs-number">128</span>),<br>        Unflatten(-<span class="hljs-number">1</span>, <span class="hljs-number">128</span>, <span class="hljs-number">7</span>, <span class="hljs-number">7</span>),<br>        <span class="hljs-keyword">nn</span>.ConvTranspose2d(<span class="hljs-number">128</span>, <span class="hljs-number">64</span>, <span class="hljs-number">4</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">1</span>),<br>        <span class="hljs-keyword">nn</span>.ReLU(),<br>        <span class="hljs-keyword">nn</span>.BatchNorm2d(<span class="hljs-number">64</span>),<br>        <span class="hljs-keyword">nn</span>.ConvTranspose2d(<span class="hljs-number">64</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, stride=<span class="hljs-number">2</span>, padding=<span class="hljs-number">1</span>),<br>        <span class="hljs-keyword">nn</span>.Tanh(),<br>        <span class="hljs-keyword">nn</span>.Flatten(<span class="hljs-number">1</span>)<br>    )<br></code></pre></td></tr></table></figure>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822220507.png" srcset="/img/loading.gif" alt="" /><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822220442.png" srcset="/img/loading.gif" alt="" /><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210822220535.png" srcset="/img/loading.gif" alt="" /></p>
+<p>从最后效果来看，确实DCGAN的效果最好。</p>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/laizi_laizi/article/details/101443333?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_title~default-1.control&amp;spm=1001.2101.3001.4242">CS231n Spring 2019 Assignment 3—Generative Adversarial Networks (GANs)对抗生成网络</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/cs231n/">cs231n</a>
+                    
+                      <a class="hover-with-bg" href="/tags/deeplearning/">deeplearning</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/08/26/%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-Transformer%EF%BC%88Attention-is-All-you-need%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">论文阅读笔记-Transformer（Attention is All you need）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/18/cs231n-assignment2%E4%BD%9C%E4%B8%9A%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">cs231n-assignment2作业笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,593 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/headpic.jfif">
+  <link rel="icon" type="image/png" href="/image/headpic.jfif">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PokeStar">
+  <meta name="keywords" content="">
+  <title>新服务器安装老旧版本Ubuntu-server方法记录 - PokeStar&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.pokestar.wang","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"iBJ8IeKzxC1t8gL78pOhBgve-9Nh9j0Va","app_key":"ikqlgnddeJu2RBBeFTSuRAyx","server_url":"https://ibj8iekz.lc-cn-e1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>PokeStar的个人小站</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/image/bg/North-America-Nebula-Deepscape_Liron-Gertsman.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="新服务器安装老旧版本Ubuntu-server方法记录">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-17 11:39" pubdate>
+        2021年7月17日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">新服务器安装老旧版本Ubuntu-server方法记录</h1>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>最近在公司实习的时候遇到这个问题，新买的服务器型号比较新，而要装的Ubuntu-server版本比较老，导致正常安装方式下，安装程序识别不出raid卡驱动，识别不到配置完的raid阵列，以下是解决方法的记录。</p>
+<h2 id="安装ubuntu16045针对无法识别raid卡"><a class="markdownIt-Anchor" href="#安装ubuntu16045针对无法识别raid卡"></a> 安装Ubuntu16.04.5（针对无法识别raid卡）</h2>
+<ul>
+<li>
+<p>U盘做成Ubuntu1604启动盘，进入安装程序</p>
+</li>
+<li>
+<p><strong>选择图中红框下面一行的HWE kernel方式</strong> ，然后进入下一个界面后再点击install Ubuntu server</p>
+</li>
+</ul>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210717133259.png" srcset="/img/loading.gif" style="zoom: 67%;" />
+<ul>
+<li>随后操作按照正常安装步骤进行，然后会出现一个安装过程中找不到光盘（CD-ROM）的问题，需要重新挂载光盘解决，方法在下文。</li>
+</ul>
+<h5 id="使用hwe-kernel的原因-source"><a class="markdownIt-Anchor" href="#使用hwe-kernel的原因-source"></a> 使用HWE kernel的原因 <a target="_blank" rel="noopener" href="https://askubuntu.com/questions/248914/what-is-hardware-enablement-hwe">Source</a></h5>
+<p>全新的硬件设备总是更频繁地向公众发布。我们希望这样的新硬件能一直在Ubuntu上工作，即使它是在Ubuntu发布之后发布的。六个月（新的Ubuntu版本发布所需的时间）是it领域非常长的一段时间。硬件支持（HWE）就是为了赶上最新的硬件技术。</p>
+<p>现在，Ubuntu希望如何实现硬件支持的目标？为内核使用滚动版本：一旦发布了新的内核，就为Ubuntu打包、测试（通过建议的pocket和特殊的Q/a方法），并提供给Ubuntu用户。这种方法当然有一些缺点：过快地发布新内核可能会带来一些错误和问题，并且可能不适合企业。</p>
+<p>解决方案是什么？为不同的用户提供不同的内核。因此，Ubuntu将提供至少两种内核：通用可用性（General Availability，GA）内核，即最稳定的内核，不会更新到特定版本；以及硬件支持（HWE）内核，即最新发布的内核。这就是为什么您同时看到linux generic和linux hwe generic包的原因。</p>
+<p><strong>总结</strong>：当你的设备某些硬件比较新，而你的使用的Ubuntu版本比较老旧，就可以使用HWE kernel进行安装。</p>
+<h2 id="安装过程中找不到光盘cd-rom的解决方法"><a class="markdownIt-Anchor" href="#安装过程中找不到光盘cd-rom的解决方法"></a> 安装过程中找不到光盘（CD-ROM）的解决方法</h2>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/deny/p/9988988.html">https://www.cnblogs.com/deny/p/9988988.html</a> 参考以上方法</p>
+<ul>
+<li>首先刻录Ubuntu iso镜像到U盘，然后将Ubuntu iso镜像拷贝到U盘中。（根目录或是你确定的目录）</li>
+<li>正常安装至提示CD-rom检测出错，类似如下情况。</li>
+</ul>
+<p><img src="https://img2018.cnblogs.com/blog/1461409/201811/1461409-20181120145256616-167049160.png" srcset="/img/loading.gif" alt="img" /></p>
+<p><img src="https://img2018.cnblogs.com/blog/1461409/201811/1461409-20181120145340292-609895231.png" srcset="/img/loading.gif" alt="img" /></p>
+<ul>
+<li>此时选择继续（Continue）退出至主菜单，选择运行shell（Execute Shell）</li>
+</ul>
+<p><img src="https://img2018.cnblogs.com/blog/1461409/201811/1461409-20181120145416462-1238072951.png" srcset="/img/loading.gif" alt="img" /></p>
+<ul>
+<li>
+<p>进入Shell，在其中执行如下命令：<br />
+用<code>ls /dev/sd*</code>看看都有那些设备，一般的情况先都是这样的<br />
+<strong>/dev/sda /dev/sda1 /dev/sda3 /dev/sda5 /dev/sdb /dev/sdb1</strong><br />
+然后拔下U盘 然后用<code>ls /dev/sd*</code>你就会发现只剩<br />
+<strong>/dev/sda /dev/sda1 /dev/sda3 /dev/sda5</strong><br />
+可以看出u盘就是<strong>dev/sdb</strong>，那么u盘上的分区就是<strong>dev/sdb1</strong><br />
+建一个空目录在根底下，命令（<strong>uinstall为新目录名，可以自行定义</strong>）<br />
+<code>mkdir uinstall</code><br />
+再把u盘挂载到这个目录下面<br />
+<code>mount /dev/sdb1 /uinstall</code><br />
+4 、然后挂载u盘里面的那个ubuntu server 的iso镜像 命令是：(<strong>注意：此处的ubuntu镜像名称以及路径须根据情况自行修改，最好在输入之前使用ls命令查看比对进行输入</strong>)<br />
+<code>mount -o loop -t iso9660 /uinstall/ubuntu-16.04.5-server-amd64.iso /cdrom</code></p>
+<p>查看cdrom中是否已经加载镜像（若已经加载,输入以下命令后应该有EFI等文件夹显示）</p>
+<p><code>ls /cdrom</code><br />
+5 、最后就<code>exit</code> ，退出后选择detect CD-rom正常安装。</p>
+</li>
+</ul>
+<p>后续步骤类似于正常Ubuntu安装方式。</p>
+<h2 id="4-软件包安装管理无法进入"><a class="markdownIt-Anchor" href="#4-软件包安装管理无法进入"></a> 4、软件包安装管理无法进入</h2>
+<p>以上步骤可能会出现软件包安装步骤无法进入的状况，可以多尝试进入几次。即下图中<em>Configure the package manager与Select and install software</em>两处多尝试进入几次。</p>
+<img src="C:\Users\12195\AppData\Roaming\Typora\typora-user-images\image-20210716093738190.png" srcset="/img/loading.gif" alt="image-20210716093738190" style="zoom: 50%;" />
+<h2 id="可选操作清理磁盘"><a class="markdownIt-Anchor" href="#可选操作清理磁盘"></a> （可选操作）清理磁盘</h2>
+<p>主要针对之前已经安装过系统的机器，建议先清理下磁盘后再进行安装</p>
+<ul>
+<li>
+<p>F2进入System Setup</p>
+</li>
+<li>
+<p>进入DeviceConfigure</p>
+</li>
+<li>
+<p>清除配置</p>
+</li>
+</ul>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210716085202906.png" srcset="/img/loading.gif" alt="image-20210716085202906" /></p>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210716085215720.png" srcset="/img/loading.gif" alt="image-20210716085215720" /></p>
+<ul>
+<li>清除preserved cache</li>
+</ul>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210716085246381.png" srcset="/img/loading.gif" alt="image-20210716085246381" /></p>
+<ul>
+<li>重新配置raid</li>
+</ul>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210716085328494.png" srcset="/img/loading.gif" alt="image-20210716085328494" /></p>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210716085355894.png" srcset="/img/loading.gif" alt="image-20210716085355894" /></p>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210716085404488.png" srcset="/img/loading.gif" alt="image-20210716085404488" /></p>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210716085416687.png" srcset="/img/loading.gif" alt="image-20210716085416687" /></p>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210716085426989.png" srcset="/img/loading.gif" alt="image-20210716085426989" /></p>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210716085435909.png" srcset="/img/loading.gif" alt="image-20210716085435909" /></p>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210716085442734.png" srcset="/img/loading.gif" alt="image-20210716085442734" /></p>
+<ul>
+<li>点击OK 完成 后续开始安装系统</li>
+</ul>
+<p><img src="C:%5CUsers%5C12195%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210716085514802.png" srcset="/img/loading.gif" alt="image-20210716085514802" /></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8A%80%E6%9C%AF%E6%9D%82%E8%B0%88/">技术杂谈</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/17/win10-Ubuntu20-04%E5%8F%8C%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">win10&Ubuntu20.04双系统安装配置</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/30/202004%E6%9C%88%E6%80%BB%E7%BB%93/">
+                        <span class="hidden-mobile">202004月总结</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

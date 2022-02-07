@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/headpic.jfif">
+  <link rel="icon" type="image/png" href="/image/headpic.jfif">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="PokeStar">
+  <meta name="keywords" content="">
+  <title>SVM-softmax学习笔记——cs231n学习记录 - PokeStar&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"blog.pokestar.wang","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"iBJ8IeKzxC1t8gL78pOhBgve-9Nh9j0Va","app_key":"ikqlgnddeJu2RBBeFTSuRAyx","server_url":"https://ibj8iekz.lc-cn-e1-shared.com"}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>PokeStar的个人小站</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/image/bg/North-America-Nebula-Deepscape_Liron-Gertsman.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SVM-softmax学习笔记——cs231n学习记录">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-25 09:33" pubdate>
+        2021年4月25日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      889 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SVM-softmax学习笔记——cs231n学习记录</h1>
+            
+            <div class="markdown-body">
+              <h2 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h2>
+<p>作为读研前的准备工作，想要把CS231n给完整学完，所以从之前就一知半解的SVM开始，好好学完这门课程。主要基于CS231n2020年的作业，希望每学完一个算法能够写一篇博客，之前的knn线性回归就有空再补吧。由于是基于CS231n，暂时只记录线性多分类SVM，后续核方法这些等学完再补。</p>
+<h2 id="svm支持向量机"><a class="markdownIt-Anchor" href="#svm支持向量机"></a> SVM支持向量机</h2>
+<p>SVM英文全称为support vector machine，是一种二分类模型，目的在于找出样本空间（特征空间）内间隔最大的分类超平面。如下图所示，假设样本只有<code>x</code>和<code>y</code>两个属性值，即可以映射到一个二维空间内，SVM想做的就是找出一条直线 $$y = w*x+b$$ 使得支持向量（即红色黑点和红色白点）之间的距离最大化。同理，在三维样本空间内，该分隔直线就成为一个分隔平面，高维样本空间内即成为一个分隔超平面。<br />
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/linear-svm-1.png" srcset="/img/loading.gif" alt="" /></p>
+<h2 id="从线性分类开始"><a class="markdownIt-Anchor" href="#从线性分类开始"></a> 从线性分类开始</h2>
+<p>首先我们谈谈线性分类，线性分类器最核心的模型就是以下公式，有一个输入<code>x</code>，一个参数矩阵<code>W</code>，和一个偏置项<code>b</code>，构成一个线性分类器$$ f(x,W) = W*x+b $$。</p>
+<p>在本次作业中，输入是一个 $$32<em>32</em>3$$ 的图片（被拉伸成3072的向量），输出10个类别对应的分数。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BB1.png" srcset="/img/loading.gif" alt="" /></p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/%E7%BA%BF%E6%80%A7%E5%88%86%E7%B1%BBscore.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<p>以上三张图片为例，当前的参数矩阵W（可能是随机生成）输出的10个预测分数，只有第二张分类正确，第三张则完全错误。</p>
+<p>而我们需要一个<code>loss函数</code>来定量当前分类器错了多少，以及一个方法来<code>优化</code>当前分类器的参数W和b。</p>
+<h2 id="损失函数"><a class="markdownIt-Anchor" href="#损失函数"></a> 损失函数</h2>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210425113638.png" srcset="/img/loading.gif" style="zoom: 50%;" />
+<p>我们的损失函数的一般形式应该如上图所示，将线性分类器$$ f(x,W) = W*x+b $$的输出结果与标签对比，得到所有结果的和再除以样本量N。</p>
+<p>多分类SVM的loss函数一般采用hinge loss，即如下形式：</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210425113934.png" srcset="/img/loading.gif" style="zoom:50%;" />
+<p>S为当前样本在线性分类器上输出得到的十个分类分数。$$S~j$$为当前样本分类为 j 标签的分数，$$ S<sub>y</sub>i $$为当前样本所对应的正确标签$$y~i$$的分类分数。所以，hinge loss的意义就是，若正确标签分类的得分比错误标签分类的得分高1以上即正确分类了该样本，则此处loss为0；反之，错误分类得分减去正确分类得分加一大于零即错误分类或分类正确性不够，则将该值作为此处loss进行累加。由此可见，对于每一个样本，由于有十种类别，其中一种为正确分类，则需要进行九次对比运算。</p>
+<p>下图为hingeloss的示意图</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210425133243.png" srcset="/img/loading.gif" style="zoom:50%;" />
+<p>最终的loss函数如下，N为样本数，i为样本X下标，j为标签下标。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210425134128.png" srcset="/img/loading.gif" style="zoom: 50%;" />
+<h4 id="防止模型过拟合正则化"><a class="markdownIt-Anchor" href="#防止模型过拟合正则化"></a> 防止模型过拟合：正则化</h4>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210425134719.png" srcset="/img/loading.gif" style="zoom:50%;" />
+<p>为了防止模型在训练集上过拟合，常常加入一个正则项来防止过拟合，本次使用的为L2正则。</p>
+<p><img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210425134922.png" srcset="/img/loading.gif" alt="" /></p>
+<h4 id="softmax分类"><a class="markdownIt-Anchor" href="#softmax分类"></a> softmax分类</h4>
+<p>多分类逻辑回归中常用，将线性分类器得出的分数转化为每个分类的概率。</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/image-20210425195738796.png" srcset="/img/loading.gif" style="zoom:67%;" />
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210425201248.png" srcset="/img/loading.gif" style="zoom:50%;" />
+<h2 id="优化方法梯度下降"><a class="markdownIt-Anchor" href="#优化方法梯度下降"></a> 优化方法：梯度下降</h2>
+<h4 id="hinge-loss"><a class="markdownIt-Anchor" href="#hinge-loss"></a> hinge loss</h4>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210425201615.png" srcset="/img/loading.gif" style="zoom:50%;" />
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210425201801.png" srcset="/img/loading.gif" style="zoom:50%;" />
+<p>将hingeloss对W求导。L2正则项求导后为 $$ 2*\lambda*W $$</p>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210425220813.png" srcset="/img/loading.gif" style="zoom:50%;" />
+<p>根据以上分析填写作业中的代码。</p>
+<h4 id="softmax"><a class="markdownIt-Anchor" href="#softmax"></a> softmax</h4>
+<img src="https://gitee.com/pokestar/image-bed/raw/master/img2021/20210426094003.png" srcset="/img/loading.gif" style="zoom:50%;" />
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/cs231n/">cs231n</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/30/202004%E6%9C%88%E6%80%BB%E7%BB%93/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">202004月总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/08/%E5%8F%8C%E7%BA%BF%E9%83%A8%E7%BD%B2gitpage-codingpage%E6%8F%90%E9%AB%98%E5%8D%9A%E5%AE%A2%E8%AE%BF%E9%97%AE%E9%80%9F%E5%BA%A6/">
+                        <span class="hidden-mobile">双线部署gitpage&codingpage提高博客访问速度</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- KaTeX -->
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" />
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
